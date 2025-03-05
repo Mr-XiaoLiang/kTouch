@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "KTouch"
 include(":phone")
 include(":wear")
- 
+include(":resource")

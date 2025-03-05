@@ -1,4 +1,4 @@
-package com.lollipop.ktouch.sound
+package com.lollipop.resource.sound
 
 import android.content.Context
 import android.media.AudioAttributes

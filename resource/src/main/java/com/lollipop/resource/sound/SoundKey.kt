@@ -1,6 +1,6 @@
-package com.lollipop.ktouch.sound
+package com.lollipop.resource.sound
 
-import com.lollipop.ktouch.R
+import com.lollipop.resource.R
 
 enum class SoundKey(
     val resId: Int

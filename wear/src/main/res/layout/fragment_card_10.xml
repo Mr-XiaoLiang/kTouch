@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lollipop.wear.widget.ArcLayout
+    <androidx.wear.widget.ArcLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -143,6 +143,6 @@
             app:layout_arc_widthPercent="0.16"
             tools:src="@drawable/ic_decade" />
 
-    </com.lollipop.wear.widget.ArcLayout>
+    </androidx.wear.widget.ArcLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

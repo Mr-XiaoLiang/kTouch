@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="activeColor" format="color" />
+    <attr name="inactiveColor" format="color" />
+    <attr name="circularMaxRadius" format="dimension" />
+
+    <declare-styleable name="HorizontalPageIndicator">
+        <attr name="activeColor" />
+        <attr name="inactiveColor" />
+        <attr name="indicatorInterval" format="dimension" />
+        <attr name="indicatorRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ArcLayout_Layout">
+        <attr name="layout_arc_angle" format="float" />
+        <attr name="layout_arc_radius" format="dimension" />
+        <attr name="layout_arc_radiusPercent" format="float"/>
+        <attr name="layout_arc_margin" format="dimension" />
+        <attr name="layout_arc_fixEdge" format="boolean" />
+        <attr name="layout_arc_sizeMode" format="enum">
+            <enum name="minEdge" value="0" />
+            <enum name="maxEdge" value="1" />
+            <enum name="height" value="2" />
+            <enum name="width" value="3" />
+            <enum name="weight" value="4" />
+        </attr>
+        <attr name="layout_arc_widthPercent" format="float" />
+        <attr name="layout_arc_heightPercent" format="float" />
+        <attr name="layout_arc_circleCenter" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="layout_arc_mode" format="enum">
+            <enum name="minEdge" value="0" />
+            <enum name="maxEdge" value="1" />
+            <enum name="height" value="2" />
+            <enum name="width" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircularTextView">
+        <attr name="circularMaxRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularImageView">
+        <attr name="circularMaxRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularOutlineLinearGroup">
+        <attr name="circularMaxRadius" />
+        <attr name="gapMaxRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RectProgressView">
+        <attr name="rectProgress" format="float" />
+        <attr name="rectMode" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+            <enum name="horizontalReversal" value="2" />
+            <enum name="verticalReversal" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ArcLinearLayout">
+        <attr name="arc_startAngle" format="float" />
+        <attr name="arc_intervalAngle" format="float" />
+        <attr name="arc_radius" format="dimension" />
+        <attr name="arc_margin" format="dimension" />
+        <attr name="arc_antiClockwise" format="boolean" />
+        <attr name="arc_mode" format="enum">
+            <enum name="minEdge" value="0" />
+            <enum name="maxEdge" value="1" />
+            <enum name="height" value="2" />
+            <enum name="width" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RingTouchLayout">
+        <attr name="ring_margin" format="dimension" />
+        <attr name="ring_width" format="dimension" />
+    </declare-styleable>
+</resources>
