@@ -52,9 +52,21 @@ object SoundManager {
         return 0
     }
 
-    fun play(soundKey: SoundKey) {
-        val id = soundIdMap[soundKey] ?: return
-        soundPool.play(id, 1f, 1f, 1, 0, 1f)
+    fun play(soundKey: SoundKey): Int {
+        val id = soundIdMap[soundKey] ?: return 0
+        return soundPool.play(id, 1f, 1f, 1, 0, 1f)
+    }
+
+    fun pause(streamID: Int) {
+        soundPool.pause(streamID)
+    }
+
+    fun resume(streamID: Int) {
+        soundPool.resume(streamID)
+    }
+
+    fun stop(streamID: Int) {
+        soundPool.stop(streamID)
     }
 
     fun preload(context: Context, array: Array<SoundKey>) {

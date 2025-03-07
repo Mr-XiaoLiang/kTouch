@@ -28,7 +28,7 @@ abstract class SubPager : Fragment() {
         val newBinding = FragmentSubPageBinding.inflate(inflater, container, false)
         binding = newBinding
         newBinding.contentGroup.addView(
-            getContentView(newBinding.contentGroup),
+            createContentView(newBinding.contentGroup),
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
@@ -62,7 +62,7 @@ abstract class SubPager : Fragment() {
         }
     }
 
-    abstract fun getContentView(parent: ViewGroup): View
+    abstract fun createContentView(parent: ViewGroup): View
 
     @CallSuper
     open fun onPageModeChange(mode: SubPageMode) {
