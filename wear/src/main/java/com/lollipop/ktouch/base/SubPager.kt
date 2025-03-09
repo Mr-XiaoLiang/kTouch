@@ -39,8 +39,29 @@ abstract class SubPager : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         onPageModeChange(getSubPageMode())
         binding?.langTouchMask?.setOnLongClickListener {
-            onPageLongClick()
-            true
+            if (getSubPageMode() == SubPageMode.Display) {
+                onPageLongClick()
+                true
+            } else {
+                false
+            }
+        }
+        binding?.langTouchMask?.setOnClickListener {
+            if (getSubPageMode() == SubPageMode.Edit) {
+                postDisplayMode()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.contentGroup?.apply {
+            val scale = when (getSubPageMode()) {
+                SubPageMode.Display -> 1F
+                SubPageMode.Edit -> 0.9F
+            }
+            scaleX = scale
+            scaleY = scale
         }
     }
 
@@ -68,16 +89,20 @@ abstract class SubPager : Fragment() {
     open fun onPageModeChange(mode: SubPageMode) {
         when (mode) {
             SubPageMode.Display -> {
-                binding?.apply {
-                    contentGroup.scaleX = 1F
-                    contentGroup.scaleY = 1F
+                binding?.contentGroup?.animate()?.apply {
+                    cancel()
+                    scaleX(1F)
+                    scaleY(1F)
+                    start()
                 }
             }
 
             SubPageMode.Edit -> {
-                binding?.apply {
-                    contentGroup.scaleX = 0.9F
-                    contentGroup.scaleY = 0.9F
+                binding?.contentGroup?.animate()?.apply {
+                    cancel()
+                    scaleX(0.9F)
+                    scaleY(0.9F)
+                    start()
                 }
             }
         }

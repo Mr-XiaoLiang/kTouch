@@ -1,13 +1,23 @@
 package com.lollipop.ktouch
 
+import android.content.Intent
 import com.lollipop.ktouch.base.PagerActivity
 import com.lollipop.ktouch.base.SubPager
+import com.lollipop.ktouch.main.MainRiderPage
+import com.lollipop.resource.sound.Rider
 
-class MainActivity : PagerActivity() {
+class MainActivity : PagerActivity(), MainRiderPage.Callback {
 
-    override val pageArray: Array<Class<out SubPager>>
-        get() = TODO("Not yet implemented")
+    override val pageArray: Array<Class<out SubPager>> by lazy {
+        arrayOf(
+            MainRiderPage.Decade::class.java
+        )
+    }
 
-
+    override fun onRiderClick(rider: Rider) {
+        if (rider == Rider.Decade) {
+            startActivity(Intent(this, DcdHeiseiActivity::class.java))
+        }
+    }
 
 }
