@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <com.lollipop.ktouch.widget.LongClickFrameLayout
         android:id="@+id/contentGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <ImageView
-        android:id="@+id/langTouchMask"
+        android:id="@+id/touchMask"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

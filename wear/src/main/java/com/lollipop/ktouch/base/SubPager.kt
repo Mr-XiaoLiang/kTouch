@@ -1,15 +1,22 @@
 package com.lollipop.ktouch.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.lollipop.ktouch.databinding.FragmentSubPageBinding
 
 abstract class SubPager : Fragment() {
+
+    companion object {
+        const val SCALE_FULL = 1F
+        const val SCALE_SMALL = 0.8F
+    }
 
     private var callback: Callback? = null
 
@@ -35,10 +42,17 @@ abstract class SubPager : Fragment() {
         return newBinding.root
     }
 
+    protected fun onMaskClick() {
+        if (getSubPageMode() == SubPageMode.Edit) {
+            postDisplayMode()
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onPageModeChange(getSubPageMode())
-        binding?.langTouchMask?.setOnLongClickListener {
+        updateByMode(getSubPageMode(), false)
+        binding?.contentGroup?.setOnLongClickListener {
             if (getSubPageMode() == SubPageMode.Display) {
                 onPageLongClick()
                 true
@@ -46,23 +60,14 @@ abstract class SubPager : Fragment() {
                 false
             }
         }
-        binding?.langTouchMask?.setOnClickListener {
-            if (getSubPageMode() == SubPageMode.Edit) {
-                postDisplayMode()
-            }
+        binding?.touchMask?.setOnClickListener {
+            onMaskClick()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        binding?.contentGroup?.apply {
-            val scale = when (getSubPageMode()) {
-                SubPageMode.Display -> 1F
-                SubPageMode.Edit -> 0.9F
-            }
-            scaleX = scale
-            scaleY = scale
-        }
+        updateByMode(getSubPageMode(), false)
     }
 
     override fun onDestroyView() {
@@ -71,15 +76,8 @@ abstract class SubPager : Fragment() {
     }
 
     private fun onPageLongClick() {
-        val pageMode = getSubPageMode()
-        when (pageMode) {
-            SubPageMode.Display -> {
-                postEditMode()
-            }
-
-            SubPageMode.Edit -> {
-                postDisplayMode()
-            }
+        if (getSubPageMode() == SubPageMode.Display) {
+            postEditMode()
         }
     }
 
@@ -87,25 +85,41 @@ abstract class SubPager : Fragment() {
 
     @CallSuper
     open fun onPageModeChange(mode: SubPageMode) {
-        when (mode) {
-            SubPageMode.Display -> {
-                binding?.contentGroup?.animate()?.apply {
-                    cancel()
-                    scaleX(1F)
-                    scaleY(1F)
-                    start()
+        updateByMode(mode, true)
+    }
+
+    private fun updateByMode(mode: SubPageMode, animation: Boolean) {
+        if (animation) {
+            when (mode) {
+                SubPageMode.Display -> {
+                    binding?.contentGroup?.animate()?.apply {
+                        cancel()
+                        scaleX(SCALE_FULL)
+                        scaleY(SCALE_FULL)
+                        start()
+                    }
+                }
+
+                SubPageMode.Edit -> {
+                    binding?.contentGroup?.animate()?.apply {
+                        cancel()
+                        scaleX(SCALE_SMALL)
+                        scaleY(SCALE_SMALL)
+                        start()
+                    }
                 }
             }
-
-            SubPageMode.Edit -> {
-                binding?.contentGroup?.animate()?.apply {
-                    cancel()
-                    scaleX(0.9F)
-                    scaleY(0.9F)
-                    start()
+        } else {
+            binding?.contentGroup?.apply {
+                val scale = when (getSubPageMode()) {
+                    SubPageMode.Display -> SCALE_FULL
+                    SubPageMode.Edit -> SCALE_SMALL
                 }
+                scaleX = scale
+                scaleY = scale
             }
         }
+        binding?.touchMask?.isVisible = mode == SubPageMode.Edit
     }
 
     override fun onDetach() {

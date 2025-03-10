@@ -19,7 +19,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_double" />
+            android:src="@drawable/ic_double" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -30,7 +30,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_ooo" />
+            android:src="@drawable/ic_ooo" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -41,7 +41,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_fourze" />
+            android:src="@drawable/ic_fourze" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -52,7 +52,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_wizard" />
+            android:src="@drawable/ic_wizard" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -63,7 +63,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_gaim" />
+            android:src="@drawable/ic_gaim" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -74,7 +74,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_drive" />
+            android:src="@drawable/ic_drive" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -85,7 +85,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_ghost" />
+            android:src="@drawable/ic_ghost" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -96,7 +96,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_exaid" />
+            android:src="@drawable/ic_exaid" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -107,7 +107,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_build" />
+            android:src="@drawable/ic_build" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -118,7 +118,7 @@
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_zio" />
+            android:src="@drawable/ic_zio" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dcdImageView"
@@ -130,7 +130,7 @@
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.25"
-            tools:src="@drawable/ic_decade" />
+            android:src="@drawable/ic_decade" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -141,7 +141,7 @@
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_k_f" />
+            android:src="@drawable/ic_k_f" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0px"
@@ -152,7 +152,7 @@
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.16"
-            tools:src="@drawable/ic_k_c" />
+            android:src="@drawable/ic_k_c" />
 
     </com.lollipop.ktouch.widget.ArcLayout>
 
