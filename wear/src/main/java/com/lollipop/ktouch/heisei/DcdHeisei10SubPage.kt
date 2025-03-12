@@ -1,5 +1,6 @@
 package com.lollipop.ktouch.heisei
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.base.SubPager
@@ -15,4 +16,12 @@ class DcdHeisei10SubPage: SubPager() {
         this.binding = newBinding
         return newBinding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.apply {
+            kuugaImageView.isSelected = true
+        }
+    }
+
 }
