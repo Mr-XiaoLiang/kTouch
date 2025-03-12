@@ -28,6 +28,10 @@ class RiderIconManager(
         return maskIconDelegate
     }
 
+    fun neon(): RiderIconNeonManager {
+        return RiderIconNeonManager(this)
+    }
+
     fun bindCallback(callback: OnRiderClickCallback) {
         onRiderClickCallback = callback
     }

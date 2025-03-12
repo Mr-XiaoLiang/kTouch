@@ -3,7 +3,15 @@ package com.lollipop.ktouch.base
 import android.animation.Animator
 import android.animation.ValueAnimator
 
-class AnimationTrain {
+class AnimationTrain private constructor() {
+
+    companion object {
+        fun create(block: AnimationTrain.() -> Unit): AnimationTrain {
+            val train = AnimationTrain()
+            train.block()
+            return train
+        }
+    }
 
     val animator = ValueAnimator()
 
@@ -40,7 +48,14 @@ class AnimationTrain {
     init {
         animator.addUpdateListener(animationUpdateCallback)
         animator.addListener(animationCallback)
-        TODO("还没写完")
+    }
+
+    fun next(block: AnimationTrain.() -> Unit): AnimationTrain {
+        val next = AnimationTrain()
+        next.prevNode = this
+        this.nextNode = next
+        next.block()
+        return next
     }
 
     private fun onUpdate(anim: ValueAnimator) {
@@ -59,6 +74,7 @@ class AnimationTrain {
         animationCallbackList.forEach {
             it.onEnd(animation)
         }
+        nextNode?.start(false)
     }
 
     private fun onCancel(animation: Animator) {
@@ -101,12 +117,12 @@ class AnimationTrain {
         animator.end()
     }
 
-    fun cache(pre: Boolean, next: Boolean) {
+    fun cancel(pre: Boolean, next: Boolean) {
         if (pre) {
-            prevNode?.cache(true, false)
+            prevNode?.cancel(true, false)
         }
         if (next) {
-            nextNode?.cache(false, true)
+            nextNode?.cancel(false, true)
         }
         animator.cancel()
     }
