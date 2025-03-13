@@ -5,15 +5,15 @@ import com.lollipop.resource.sound.Rider
 
 class RiderIconManager(
     private var onRiderClickCallback: OnRiderClickCallback? = null
-) {
+): RiderIconGroup {
 
     private val maskIconDelegateMap = HashMap<Rider, MaskIconDelegate>()
 
-    private var animationList = ArrayList<MaskIconDelegate>()
+    private var playerList = ArrayList<MaskIconDelegate>()
 
-    val animationIconCount: Int
+    override val playerIconCount: Int
         get() {
-            return animationList.size
+            return playerList.size
         }
 
     fun bind(
@@ -55,33 +55,39 @@ class RiderIconManager(
     }
 
     fun clearAnimationList() {
-        animationList.clear()
+        playerList.clear()
     }
 
     fun putAnimationList(rider: Rider) {
         maskIconDelegateMap[rider]?.let {
-            animationList.add(it)
+            playerList.add(it)
         }
     }
 
-    fun selectOnly(index: Int) {
-        for (i in animationList.indices) {
-            val maskIconDelegate = animationList[i]
+    override fun selectOnly(index: Int) {
+        for (i in playerList.indices) {
+            val maskIconDelegate = playerList[i]
             maskIconDelegate.setSelect(i == index)
         }
     }
 
-    fun selectTo(index: Int) {
-        for (i in animationList.indices) {
-            val maskIconDelegate = animationList[i]
+    override fun selectTo(index: Int) {
+        for (i in playerList.indices) {
+            val maskIconDelegate = playerList[i]
             maskIconDelegate.setSelect(i <= index)
         }
     }
 
-    fun selectFrom(index: Int) {
-        for (i in animationList.indices) {
-            val maskIconDelegate = animationList[i]
+    override fun selectFrom(index: Int) {
+        for (i in playerList.indices) {
+            val maskIconDelegate = playerList[i]
             maskIconDelegate.setSelect(i >= index)
+        }
+    }
+
+    override fun setSelect(index: Int, isSelected: Boolean) {
+        if (index >= 0 && index < playerList.size) {
+            playerList[index].setSelect(isSelected)
         }
     }
 

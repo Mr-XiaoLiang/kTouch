@@ -1,12 +1,14 @@
 package com.lollipop.ktouch.base
 
+import com.lollipop.ktouch.base.neon.OrderlyNeon
+
 class RiderIconNeonManager(
     val iconManager: RiderIconManager
 ) {
 
     companion object {
         val NEON_STYLE_LIST: List<NeonStep> = listOf(
-
+            OrderlyNeon
         )
     }
 
@@ -14,7 +16,6 @@ class RiderIconNeonManager(
 
     init {
         neonStyleList.addAll(NEON_STYLE_LIST)
-        TODO("还没写完")
     }
 
     fun play(maxTime: Long): AnimationTrain? {
@@ -65,7 +66,7 @@ class RiderIconNeonManager(
 
         abstract val duration: Long
 
-        abstract fun buildTrain(iconManager: RiderIconManager, train: AnimationTrain)
+        abstract fun buildTrain(iconGroup: RiderIconGroup, animator: RiderIconAnimator)
 
     }
 

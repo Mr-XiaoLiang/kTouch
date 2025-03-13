@@ -3,7 +3,7 @@ package com.lollipop.ktouch.base
 import android.animation.Animator
 import android.animation.ValueAnimator
 
-class AnimationTrain private constructor() {
+class AnimationTrain private constructor() : RiderIconAnimator {
 
     companion object {
         fun create(block: AnimationTrain.() -> Unit): AnimationTrain {
@@ -19,7 +19,7 @@ class AnimationTrain private constructor() {
     private var nextNode: AnimationTrain? = null
 
     private val animationCallbackList by lazy {
-        mutableListOf<AnimationCallback>()
+        mutableListOf<RiderIconAnimator.AnimationCallback>()
     }
 
     private val animationUpdateCallback = ValueAnimator.AnimatorUpdateListener { anim ->
@@ -60,7 +60,7 @@ class AnimationTrain private constructor() {
 
     private fun onUpdate(anim: ValueAnimator) {
         animationCallbackList.forEach {
-            it.onUpdate(anim)
+            it.onUpdate(anim.animatedValue)
         }
     }
 
@@ -140,28 +140,28 @@ class AnimationTrain private constructor() {
         return false
     }
 
-    fun registerCallback(callback: AnimationCallback) {
-        animationCallbackList.add(callback)
-    }
-
-    fun unregisterCallback(callback: AnimationCallback): Boolean {
-        return animationCallbackList.remove(callback)
-    }
-
     fun clearCallbacks() {
         animationCallbackList.clear()
     }
 
-    interface AnimationCallback {
-        fun onUpdate(anim: ValueAnimator)
+    override fun setIntValues(vararg value: Int) {
+        animator.setIntValues(*value)
+    }
 
-        fun onStart(animation: Animator)
+    override fun setFloatValues(vararg value: Float) {
+        animator.setFloatValues(*value)
+    }
 
-        fun onEnd(animation: Animator)
+    override fun setDuration(duration: Long) {
+        animator.setDuration(duration)
+    }
 
-        fun onCancel(animation: Animator)
+    override fun addListener(listener: RiderIconAnimator.AnimationCallback) {
+        animationCallbackList.add(listener)
+    }
 
-        fun onRepeat(animation: Animator)
+    override fun removeListener(listener: RiderIconAnimator.AnimationCallback) {
+        animationCallbackList.remove(listener)
     }
 
 }
