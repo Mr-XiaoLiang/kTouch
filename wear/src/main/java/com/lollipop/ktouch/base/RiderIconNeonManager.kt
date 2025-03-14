@@ -14,8 +14,14 @@ class RiderIconNeonManager(
 
     private val neonStyleList = ArrayList<NeonStep>()
 
+    private var currentTrain: AnimationTrain? = null
+
     init {
         neonStyleList.addAll(NEON_STYLE_LIST)
+    }
+
+    fun cancel() {
+        currentTrain?.cancel(pre = true, next = true)
     }
 
     fun play(maxTime: Long): AnimationTrain? {
@@ -29,6 +35,8 @@ class RiderIconNeonManager(
             }
             train = newTrain
         }
+        currentTrain?.cancel(pre = true, next = true)
+        currentTrain = train
         return train
     }
 

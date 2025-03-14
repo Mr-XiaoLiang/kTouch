@@ -5,7 +5,7 @@ import com.lollipop.resource.sound.Rider
 
 class RiderIconManager(
     private var onRiderClickCallback: OnRiderClickCallback? = null
-): RiderIconGroup {
+) : RiderIconGroup {
 
     private val maskIconDelegateMap = HashMap<Rider, MaskIconDelegate>()
 
@@ -58,10 +58,17 @@ class RiderIconManager(
         playerList.clear()
     }
 
-    fun putAnimationList(rider: Rider) {
-        maskIconDelegateMap[rider]?.let {
-            playerList.add(it)
+    fun putAnimationList(rider: Rider): Boolean {
+        val iconDelegate = maskIconDelegateMap[rider] ?: return false
+        if (playerList.contains(iconDelegate)) {
+            return false
         }
+        return playerList.add(iconDelegate)
+    }
+
+    fun removeAllRider() {
+        maskIconDelegateMap.clear()
+        clearAnimationList()
     }
 
     override fun selectOnly(index: Int) {
