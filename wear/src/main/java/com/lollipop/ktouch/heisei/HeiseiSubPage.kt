@@ -17,8 +17,6 @@ abstract class HeiseiSubPage : SubPager() {
 
     protected var neonManager: RiderIconNeonManager? = null
 
-    protected var isDcd = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         iconManager.bindCallback(::onRiderClick)
@@ -33,19 +31,6 @@ abstract class HeiseiSubPage : SubPager() {
         iconManager.removeAllRider()
     }
 
-    protected fun onRiderClick(rider: Rider) {
-        if (isDcd) {
-            return
-        }
-        if (iconManager.putAnimationList(rider)) {
-            if (rider == Rider.Decade) {
-                isDcd = true
-                neonManager?.cancel()
-                neonManager = iconManager.neon().also {
-                    it.play(5000)?.start(true)
-                }
-            }
-        }
-    }
+    protected abstract fun onRiderClick(rider: Rider)
 
 }

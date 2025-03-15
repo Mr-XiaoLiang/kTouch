@@ -16,6 +16,16 @@ class RiderIconManager(
             return playerList.size
         }
 
+    val riderIconCount: Int
+        get() {
+            return maskIconDelegateMap.size
+        }
+
+    val isPlayerFilled: Boolean
+        get() {
+            return playerList.size == maskIconDelegateMap.size
+        }
+
     fun bind(
         rider: Rider,
         iconView: ImageView,
@@ -40,8 +50,13 @@ class RiderIconManager(
         return maskIconDelegateMap[rider]
     }
 
-    fun playAnimation(rider: Rider) {
-        maskIconDelegateMap[rider]?.playAnimation()
+    fun playAnimation(rider: Rider, onAnimationEnd: (() -> Unit)? = null) {
+        val iconDelegate = maskIconDelegateMap[rider]
+        if (iconDelegate == null) {
+            onAnimationEnd?.invoke()
+            return
+        }
+        iconDelegate.playAnimation(onAnimationEnd)
     }
 
     fun reset(rider: Rider) {
@@ -54,11 +69,11 @@ class RiderIconManager(
         }
     }
 
-    fun clearAnimationList() {
+    fun clearPlayerList() {
         playerList.clear()
     }
 
-    fun putAnimationList(rider: Rider): Boolean {
+    fun putPlayerList(rider: Rider): Boolean {
         val iconDelegate = maskIconDelegateMap[rider] ?: return false
         if (playerList.contains(iconDelegate)) {
             return false
@@ -68,7 +83,11 @@ class RiderIconManager(
 
     fun removeAllRider() {
         maskIconDelegateMap.clear()
-        clearAnimationList()
+        clearPlayerList()
+    }
+
+    fun select(rider: Rider, isSelected: Boolean) {
+        maskIconDelegateMap[rider]?.setSelect(isSelected)
     }
 
     override fun selectOnly(index: Int) {

@@ -41,17 +41,25 @@ class MaskIconDelegate(
         maskReset()
     }
 
-    fun playAnimation() {
+    fun playAnimation(onAnimationEnd: (() -> Unit)? = null) {
         maskReset()
-        val view = maskView ?: return
+        val view = maskView
+        if (view == null) {
+            onAnimationEnd?.invoke()
+            return
+        }
+        val durationTime = 600L
         view.animate()?.apply {
             cancel()
             scaleX(6F)
             scaleY(6F)
             alpha(0F)
-            duration = 600
+            duration = durationTime
             setListener(
                 OnceAnimatorListener(
+                    onStartCallback = {
+                        view.isVisible = true
+                    },
                     onEndCallback = {
                         view.isVisible = false
                     }
@@ -59,10 +67,15 @@ class MaskIconDelegate(
             )
             start()
         }
+        if (onAnimationEnd != null) {
+            view.postDelayed(kotlinx.coroutines.Runnable {
+                onAnimationEnd.invoke()
+            }, durationTime)
+        }
     }
 
     private fun maskReset() {
-        maskView?.alpha = 0F
+        maskView?.alpha = 1F
         maskView?.scaleX = 1F
         maskView?.scaleY = 1F
     }

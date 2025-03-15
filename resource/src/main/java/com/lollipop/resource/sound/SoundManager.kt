@@ -11,6 +11,8 @@ import java.util.concurrent.Executors
 object SoundManager {
 
     private val soundIdMap = ConcurrentHashMap<SoundKey, Int>()
+    private val soundPlayTimeMap = ConcurrentHashMap<SoundKey, Long>()
+    private val streamIdMap = ConcurrentHashMap<SoundKey, Int>()
 
     private val soundPool by lazy {
         createSoundPool()
@@ -18,6 +20,10 @@ object SoundManager {
 
     private val executor by lazy {
         Executors.newSingleThreadExecutor()
+    }
+
+    private fun now(): Long {
+        return System.currentTimeMillis()
     }
 
     private fun createSoundPool(): SoundPool {
@@ -28,6 +34,17 @@ object SoundManager {
         builder.setAudioAttributes(attrBuilder.build())
         val pool = builder.build()
         return pool
+    }
+
+    fun isPlaying(soundKey: SoundKey): Boolean {
+        soundIdMap[soundKey] ?: return false
+        val startTime = soundPlayTimeMap[soundKey] ?: return false
+        return now() - startTime <= soundKey.time
+    }
+
+    private fun rememberPlay(soundKey: SoundKey, streamId: Int) {
+        soundPlayTimeMap[soundKey] = now()
+        streamIdMap[soundKey] = streamId
     }
 
     fun load(context: Context, soundKey: SoundKey) {
@@ -54,7 +71,9 @@ object SoundManager {
 
     fun play(soundKey: SoundKey): Int {
         val id = soundIdMap[soundKey] ?: return 0
-        return soundPool.play(id, 1f, 1f, 1, 0, 1f)
+        val playId = soundPool.play(id, 1f, 1f, 1, 0, 1f)
+        rememberPlay(soundKey, playId)
+        return playId
     }
 
     fun pause(streamID: Int) {
@@ -67,6 +86,13 @@ object SoundManager {
 
     fun stop(streamID: Int) {
         soundPool.stop(streamID)
+    }
+
+    fun optStop(soundKey: SoundKey) {
+        if (isPlaying(soundKey)) {
+            val streamId = streamIdMap[soundKey] ?: return
+            stop(streamId)
+        }
     }
 
     fun preload(context: Context, array: Array<SoundKey>) {
