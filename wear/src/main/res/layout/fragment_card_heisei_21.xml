@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,287 +12,289 @@
             android:id="@+id/doubleImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_double"
             app:layout_arc_angle="270"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_double" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/oooImageView"
             android:layout_width="0px"
             android:layout_height="0px"
-            android:id="@+id/oooImageView"
+            android:src="@drawable/ic_ooo"
             app:layout_arc_angle="306"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_ooo" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fourzeImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_fourze"
             app:layout_arc_angle="342"
             app:layout_arc_fixEdge="true"
-            android:id="@+id/fourzeImageView"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_fourze" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/wizardImageView"
             android:layout_width="0px"
             android:layout_height="0px"
-            android:id="@+id/wizardImageView"
+            android:src="@drawable/ic_wizard"
             app:layout_arc_angle="18"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_wizard" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/gaimImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_gaim"
             app:layout_arc_angle="54"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:id="@+id/gaimImageView"
-            android:src="@drawable/ic_gaim" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/driveImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_drive"
             app:layout_arc_angle="90"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_drive"
-            android:id="@+id/driveImageView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ghostImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_ghost"
             app:layout_arc_angle="126"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_ghost"
-            android:id="@+id/ghostImageView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/exaidImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_exaid"
             app:layout_arc_angle="162"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_exaid"
-            android:id="@+id/exaidImageView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buildImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_build"
             app:layout_arc_angle="198"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_build"
-            android:id="@+id/buildImageView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/zioImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_zio"
             app:layout_arc_angle="234"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_zio"
-            android:id="@+id/zioImageView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dcdImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_decade"
             app:layout_arc_angle="270"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.25"
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.25"
-            android:src="@drawable/ic_decade" />
+            app:layout_arc_widthPercent="0.25" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/funcImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_k_f"
             app:layout_arc_angle="150"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_k_f" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cancelImageView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_k_c"
             app:layout_arc_angle="30"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_k_c" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/doubleMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_double"
             app:layout_arc_angle="270"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_double" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/oooMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
-            android:id="@+id/oooMaskView"
+            android:src="@drawable/ic_ooo"
             app:layout_arc_angle="306"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_ooo" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fourzeMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_fourze"
             app:layout_arc_angle="342"
             app:layout_arc_fixEdge="true"
-            android:id="@+id/fourzeMaskView"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_fourze" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/wizardMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
-            android:id="@+id/wizardMaskView"
+            android:src="@drawable/ic_wizard"
             app:layout_arc_angle="18"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_wizard" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/gaimMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_gaim"
             app:layout_arc_angle="54"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:id="@+id/gaimMaskView"
-            android:src="@drawable/ic_gaim" />
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/driveMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_drive"
             app:layout_arc_angle="90"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_drive"
-            android:id="@+id/driveMaskView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ghostMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_ghost"
             app:layout_arc_angle="126"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_ghost"
-            android:id="@+id/ghostMaskView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/exaidMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_exaid"
             app:layout_arc_angle="162"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_exaid"
-            android:id="@+id/exaidMaskView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buildMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_build"
             app:layout_arc_angle="198"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_build"
-            android:id="@+id/buildMaskView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/zioMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_zio"
             app:layout_arc_angle="234"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.16"
             app:layout_arc_radiusPercent="0.96"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.16"
-            android:src="@drawable/ic_zio"
-            android:id="@+id/zioMaskView"/>
+            app:layout_arc_widthPercent="0.16" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dcdMaskView"
             android:layout_width="0px"
             android:layout_height="0px"
+            android:src="@drawable/ic_decade"
             app:layout_arc_angle="270"
             app:layout_arc_fixEdge="true"
             app:layout_arc_heightPercent="0.25"
             app:layout_arc_radiusPercent="0.4"
             app:layout_arc_sizeMode="minEdge"
-            app:layout_arc_widthPercent="0.25"
-            android:src="@drawable/ic_decade" />
+            app:layout_arc_widthPercent="0.25" />
 
     </com.lollipop.ktouch.widget.ArcLayout>
 

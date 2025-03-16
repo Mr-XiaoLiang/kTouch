@@ -49,16 +49,16 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            iconManager.bind(Rider.Kuuga, kuugaImageView, kuugaMaskView)
-            iconManager.bind(Rider.Kiva, kivaImageView, kivaMaskView)
-            iconManager.bind(Rider.Kabuto, kabutoImageView, kabutoMaskView)
-            iconManager.bind(Rider.Hibiki, hibikiImageView, hibikiMaskView)
-            iconManager.bind(Rider.Ryuki, ryukiImageView, ryukiMaskView)
-            iconManager.bind(Rider.Faiz, faizImageView, faizMaskView)
-            iconManager.bind(Rider.Deno, denoImageView, denoMaskView)
-            iconManager.bind(Rider.Decade, dcdImageView, dcdMaskView)
-            iconManager.bind(Rider.Agito, agitoImageView, agitoMaskView)
-            iconManager.bind(Rider.Blade, bladeImageView, bladeMaskView)
+            bindRider(Rider.Kuuga, kuugaImageView, kuugaMaskView)
+            bindRider(Rider.Kiva, kivaImageView, kivaMaskView)
+            bindRider(Rider.Kabuto, kabutoImageView, kabutoMaskView)
+            bindRider(Rider.Hibiki, hibikiImageView, hibikiMaskView)
+            bindRider(Rider.Ryuki, ryukiImageView, ryukiMaskView)
+            bindRider(Rider.Faiz, faizImageView, faizMaskView)
+            bindRider(Rider.Deno, denoImageView, denoMaskView)
+            bindRider(Rider.Decade, dcdImageView, dcdMaskView)
+            bindRider(Rider.Agito, agitoImageView, agitoMaskView)
+            bindRider(Rider.Blade, bladeImageView, bladeMaskView)
             funcImageView.setOnClickListener {
                 onFClick()
             }

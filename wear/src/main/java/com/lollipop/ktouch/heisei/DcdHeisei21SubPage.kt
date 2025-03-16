@@ -1,19 +1,44 @@
 package com.lollipop.ktouch.heisei
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import com.lollipop.ktouch.base.RiderIconManager
-import com.lollipop.ktouch.base.SubPager
 import com.lollipop.ktouch.databinding.FragmentCardHeisei21Binding
 import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.sound.SoundKey
+import com.lollipop.resource.sound.SoundManager
 
-class DcdHeisei21SubPage : SubPager() {
+class DcdHeisei21SubPage : HeiseiSubPage() {
 
     private var binding: FragmentCardHeisei21Binding? = null
 
-    private val iconManager by lazy {
-        RiderIconManager()
+    private val fRiderList = ArrayList<Rider>()
+
+    private var currentState = State.INIT
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        SoundManager.preload(
+            context,
+            arrayOf(
+                SoundKey.DeviceSpace,
+                SoundKey.DeviceBoot,
+                Rider.Ghost.nameSound,
+                Rider.Drive.nameSound,
+                Rider.Gaim.nameSound,
+                Rider.Fourze.nameSound,
+                Rider.Wizard.nameSound,
+                Rider.Double.nameSound,
+                Rider.Build.nameSound,
+                Rider.Ooo.nameSound,
+                Rider.Zio.nameSound,
+                Rider.ExAid.nameSound,
+                Rider.Decade.nameSound,
+                // TODO 这个声音不该在这里
+                SoundKey.DeviceBoot21,
+            )
+        )
     }
 
     override fun createContentView(parent: ViewGroup): View {
@@ -25,19 +50,121 @@ class DcdHeisei21SubPage : SubPager() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            iconManager.bind(Rider.Ghost, ghostImageView, ghostMaskView)
-            iconManager.bind(Rider.Drive, driveImageView, driveMaskView)
-            iconManager.bind(Rider.Gaim, gaimImageView, gaimMaskView)
-            iconManager.bind(Rider.Fourze, fourzeImageView, fourzeMaskView)
-            iconManager.bind(Rider.Wizard, wizardImageView, wizardMaskView)
-            iconManager.bind(Rider.Double, doubleImageView, doubleMaskView)
-            iconManager.bind(Rider.Build, buildImageView, buildMaskView)
-            iconManager.bind(Rider.Ooo, oooImageView, oooMaskView)
-            iconManager.bind(Rider.Zio, zioImageView, zioMaskView)
-            iconManager.bind(Rider.ExAid, exaidImageView, exaidMaskView)
-            iconManager.bind(Rider.Decade, dcdImageView, dcdMaskView)
+            bindRider(Rider.Ghost, ghostImageView, ghostMaskView)
+            bindRider(Rider.Drive, driveImageView, driveMaskView)
+            bindRider(Rider.Gaim, gaimImageView, gaimMaskView)
+            bindRider(Rider.Fourze, fourzeImageView, fourzeMaskView)
+            bindRider(Rider.Wizard, wizardImageView, wizardMaskView)
+            bindRider(Rider.Double, doubleImageView, doubleMaskView)
+            bindRider(Rider.Build, buildImageView, buildMaskView)
+            bindRider(Rider.Ooo, oooImageView, oooMaskView)
+            bindRider(Rider.Zio, zioImageView, zioMaskView)
+            bindRider(Rider.ExAid, exaidImageView, exaidMaskView)
+            bindRider(Rider.Decade, dcdImageView, dcdMaskView)
 
+            funcImageView.setOnClickListener { onFClick() }
+            cancelImageView.setOnClickListener { onCClick() }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        SoundManager.play(SoundKey.DeviceBoot21)
+    }
+
+    override fun onRiderClick(rider: Rider) {
+        if (rider == Rider.Decade) {
+            onDcdClick()
+            return
+        }
+        when (currentState) {
+            State.INIT -> {
+                if (iconManager.putPlayerList(rider)) {
+                    iconManager.select(rider, true)
+                    SoundManager.play(rider.nameSound)
+                    iconManager.playAnimation(rider)
+                }
+            }
+
+            State.READY -> {
+                if (!fRiderList.contains(rider)) {
+                    fRiderList.add(rider)
+                    iconManager.select(rider, true)
+                    SoundManager.play(rider.nameSound)
+                    iconManager.playAnimation(rider)
+                } else {
+                    SoundManager.play(SoundKey.DeviceSpace)
+                }
+            }
+        }
+    }
+
+    private fun onDcdClick() {
+        when (currentState) {
+            State.INIT -> {
+                if (iconManager.playerIconCount == iconManager.riderIconCount - 1) {
+                    currentState = State.READY
+                    val rider = Rider.Decade
+                    iconManager.putPlayerList(rider)
+                    iconManager.select(rider, true)
+                    iconManager.playAnimation(rider) {
+                        // TODO 临时用一个声音播放
+                        val sound = SoundKey.DeviceBoot21
+                        SoundManager.play(sound)
+                        neonManager?.cancel()
+                        neonManager = iconManager.neon()
+                        neonManager?.play(sound.time)?.start(true)
+                    }
+                } else {
+                    // 这种情况下，就不操作吧
+                    SoundManager.play(SoundKey.DeviceSpace)
+                }
+            }
+
+            State.READY -> {
+                SoundManager.play(SoundKey.NameDecade)
+            }
+        }
+    }
+
+    private fun onFClick() {
+        when (currentState) {
+            State.INIT -> {
+                // 这种情况下，就不操作吧
+                SoundManager.play(SoundKey.DeviceSpace)
+            }
+
+            State.READY -> {
+                if (fRiderList.isEmpty()) {
+                    // 这种情况下，就不操作吧
+                    SoundManager.play(SoundKey.DeviceSpace)
+                } else {
+                    for (rider in fRiderList) {
+                        iconManager.select(rider, false)
+                        // TODO 播放大招的声音，这里用临时的顶一下
+                        SoundManager.play(rider.nameSound)
+                    }
+                    fRiderList.clear()
+                }
+            }
+        }
+    }
+
+    private fun onCClick() {
+        SoundManager.play(SoundKey.DeviceSpace)
+        if (fRiderList.isNotEmpty()) {
+            fRiderList.clear()
+        } else {
+            // TODO 退出的声音需要确认一下
+            SoundManager.play(SoundKey.DeviceExit21)
+            iconManager.clearPlayerList()
+        }
+    }
+
+    private enum class State {
+        INIT,
+        READY,
     }
 
 }
