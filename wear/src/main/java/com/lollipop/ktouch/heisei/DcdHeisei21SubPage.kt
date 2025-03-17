@@ -109,8 +109,7 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
                     iconManager.putPlayerList(rider)
                     iconManager.select(rider, true)
                     iconManager.playAnimation(rider) {
-                        // TODO 临时用一个声音播放
-                        val sound = SoundKey.DeviceBoot21
+                        val sound = SoundKey.HeiseiDcdFinally
                         SoundManager.play(sound)
                         neonManager?.cancel()
                         neonManager = iconManager.neon()

@@ -5,6 +5,8 @@ import com.lollipop.ktouch.base.PagerActivity
 import com.lollipop.ktouch.base.SubPager
 import com.lollipop.ktouch.main.MainRiderPage
 import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.sound.SoundKey
+import com.lollipop.resource.sound.SoundManager
 
 class MainActivity : PagerActivity(), MainRiderPage.Callback {
 
@@ -12,6 +14,11 @@ class MainActivity : PagerActivity(), MainRiderPage.Callback {
         arrayOf(
             MainRiderPage.Decade::class.java
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SoundManager.play(SoundKey.DeviceBoot)
     }
 
     override fun onRiderClick(rider: Rider) {

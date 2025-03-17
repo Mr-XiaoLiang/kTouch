@@ -34,5 +34,6 @@ enum class SoundKey(
     NameZeroOne(R.raw.s_name_zero_one, 1),
     NameZio(R.raw.s_name_zio, 1),
 
+    HeiseiDcdFinally(R.raw.s_heishei_dcd_finally, 16)
 
 }
