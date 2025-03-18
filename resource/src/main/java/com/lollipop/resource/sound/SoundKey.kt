@@ -34,6 +34,29 @@ enum class SoundKey(
     NameZeroOne(R.raw.s_name_zero_one, 1),
     NameZio(R.raw.s_name_zio, 1),
 
-    HeiseiDcdFinally(R.raw.s_heishei_dcd_finally, 16)
+    HeiseiDcdFinally(R.raw.s_heishei_dcd_finally, 16),
+
+    SkillAgito(R.raw.s_skill_agito, 10),
+    SkillBlade(R.raw.s_skill_blade, 10),
+    SkillDecade(R.raw.s_skill_dcd, 10),
+//    SkillBuild(R.raw.s_skill_build, 10),
+//    SkillDecade(R.raw.s_skill_decade, 10),
+    SkillDeno(R.raw.s_skill_deno, 10),
+//    SkillDouble(R.raw.s_skill_double, 10),
+//    SkillDrive(R.raw.s_skill_drive, 10),
+//    SkillExAid(R.raw.s_skill_exaid, 10),
+    SkillFaiz(R.raw.s_skill_faiz, 10),
+//    SkillFourze(R.raw.s_skill_fourze, 10),
+//    SkillGaim(R.raw.s_skill_gaim, 10),
+//    SkillGhost(R.raw.s_skill_ghost, 10),
+    SkillHikibi(R.raw.s_skill_hibiki, 9),
+    SkillKabuto(R.raw.s_skill_kabuto, 9),
+    SkillKiva(R.raw.s_skill_kiva, 10),
+    SkillKuuga(R.raw.s_skill_kuuga, 11),
+//    SkillOoo(R.raw.s_skill_ooo, 10),
+    SkillRyuki(R.raw.s_skill_ryuki, 10),
+//    SkillWizard(R.raw.s_skill_wizard, 10),
+//    SkillZeroOne(R.raw.s_skill_zero_one, 10),
+//    SkillZio(R.raw.s_skill_zio, 10),
 
 }
