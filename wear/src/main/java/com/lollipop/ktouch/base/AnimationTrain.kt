@@ -164,4 +164,20 @@ class AnimationTrain private constructor() : RiderIconAnimator {
         animationCallbackList.remove(listener)
     }
 
+    override fun setRepeatCount(count: Int) {
+        animator.repeatCount = count
+    }
+
+    override fun setRepeatInfinite() {
+        animator.repeatCount = ValueAnimator.INFINITE
+    }
+
+    override fun setRepeatByRestart() {
+        animator.repeatMode = ValueAnimator.RESTART
+    }
+
+    override fun setRepeatByReverse() {
+        animator.repeatMode = ValueAnimator.REVERSE
+    }
+
 }

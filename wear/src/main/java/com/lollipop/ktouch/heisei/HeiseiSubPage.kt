@@ -1,6 +1,8 @@
 package com.lollipop.ktouch.heisei
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import com.lollipop.ktouch.base.RiderIconManager
@@ -17,6 +19,10 @@ abstract class HeiseiSubPage : SubPager() {
 
     protected var neonManager: RiderIconNeonManager? = null
 
+    private val mainHandler by lazy {
+        Handler(Looper.getMainLooper())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         iconManager.bindCallback(::onRiderClick)
@@ -29,6 +35,12 @@ abstract class HeiseiSubPage : SubPager() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         iconManager.removeAllRider()
+    }
+
+    protected fun postDelay(delay: Long, action: () -> Unit) {
+        mainHandler.postDelayed({
+            action()
+        }, delay)
     }
 
     protected abstract fun onRiderClick(rider: Rider)

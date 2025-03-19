@@ -9,6 +9,10 @@ interface RiderIconAnimator {
     fun setDuration(duration: Long)
     fun addListener(listener: AnimationCallback)
     fun removeListener(listener: AnimationCallback)
+    fun setRepeatCount(count: Int)
+    fun setRepeatInfinite()
+    fun setRepeatByRestart()
+    fun setRepeatByReverse()
 
     interface AnimationCallback {
         fun onUpdate(value: Any)

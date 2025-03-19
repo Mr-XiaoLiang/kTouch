@@ -1,5 +1,6 @@
 package com.lollipop.ktouch.base
 
+import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
 import com.lollipop.ktouch.base.neon.OrderlyNeon
 
 class RiderIconNeonManager(
@@ -8,7 +9,8 @@ class RiderIconNeonManager(
 
     companion object {
         val NEON_STYLE_LIST: List<NeonStep> = listOf(
-            OrderlyNeon
+            OrderlyNeon,
+            MerryGoRoundNeon.Default
         )
     }
 
@@ -25,7 +27,10 @@ class RiderIconNeonManager(
     }
 
     fun play(maxTime: Long): AnimationTrain? {
-        val stepList = randomStep(maxTime)
+        return play(randomStep(maxTime))
+    }
+
+    fun play(stepList: List<NeonStep>): AnimationTrain? {
         var train: AnimationTrain? = null
         for (step in stepList) {
             val newTrain = train?.next {

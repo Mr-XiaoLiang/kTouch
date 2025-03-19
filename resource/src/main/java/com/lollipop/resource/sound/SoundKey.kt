@@ -34,7 +34,8 @@ enum class SoundKey(
     NameZeroOne(R.raw.s_name_zero_one, 1),
     NameZio(R.raw.s_name_zio, 1),
 
-    HeiseiDcdFinally(R.raw.s_heishei_dcd_finally, 16),
+    HeiseiDcdFinally(R.raw.s_heisei_dcd_finally, 16),
+    HeiseiDcdFinally21(R.raw.s_heisei_dcd_finally_21, 14),
 
     SkillAgito(R.raw.s_skill_agito, 10),
     SkillBlade(R.raw.s_skill_blade, 10),
@@ -56,7 +57,7 @@ enum class SoundKey(
 //    SkillOoo(R.raw.s_skill_ooo, 10),
     SkillRyuki(R.raw.s_skill_ryuki, 10),
 //    SkillWizard(R.raw.s_skill_wizard, 10),
-//    SkillZeroOne(R.raw.s_skill_zero_one, 10),
+    SkillZeroOne(R.raw.s_skill_zero_one, 9),
 //    SkillZio(R.raw.s_skill_zio, 10),
 
 }

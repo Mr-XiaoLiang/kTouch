@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei21Binding
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
@@ -83,6 +84,11 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
                 if (iconManager.putPlayerList(rider)) {
                     iconManager.select(rider, true)
                     SoundManager.play(rider.nameSound)
+                    postDelay(rider.nameSound.time) {
+                        if (isPlayerRiderFilled()) {
+                            onRiderReady()
+                        }
+                    }
                     iconManager.playAnimation(rider)
                 }
             }
@@ -100,18 +106,36 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
         }
     }
 
+    private fun onRiderReady() {
+        if (currentState != State.INIT) {
+            return
+        }
+        neonManager?.cancel()
+        neonManager = iconManager.neon().also { neon ->
+            neon.play(listOf(MerryGoRoundNeon.Infinite))?.start(true)
+        }
+        // 这里还应该播放待机音效的，但是没找到，是一个来电话的声音
+    }
+
+    private fun isPlayerRiderFilled(): Boolean {
+        return iconManager.playerIconCount == iconManager.riderIconCount - 1
+    }
+
     private fun onDcdClick() {
         when (currentState) {
             State.INIT -> {
-                if (iconManager.playerIconCount == iconManager.riderIconCount - 1) {
+                if (isPlayerRiderFilled()) {
+                    // 停止已有的动画
+                    neonManager?.cancel()
+                    neonManager = null
+                    // 开始准备变身
                     currentState = State.READY
                     val rider = Rider.Decade
                     iconManager.putPlayerList(rider)
                     iconManager.select(rider, true)
                     iconManager.playAnimation(rider) {
-                        val sound = SoundKey.HeiseiDcdFinally
+                        val sound = SoundKey.HeiseiDcdFinally21
                         SoundManager.play(sound)
-                        neonManager?.cancel()
                         neonManager = iconManager.neon()
                         neonManager?.play(sound.time)?.start(true)
                     }
