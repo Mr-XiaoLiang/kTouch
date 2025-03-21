@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.lollipop.ktouch.base.neon.RippleNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei10Binding
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
@@ -13,30 +14,24 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
 
     private var binding: FragmentCardHeisei10Binding? = null
 
-    private val fRiderList = ArrayList<Rider>()
+    private val selectedRiderList = ArrayList<Rider>()
 
     private var currentState = State.INIT
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        SoundManager.preload(
+        preloadRider(
             context,
-            arrayOf(
-                SoundKey.DeviceSpace,
-                SoundKey.DeviceBoot,
-                Rider.Kuuga.nameSound,
-                Rider.Kiva.nameSound,
-                Rider.Kabuto.nameSound,
-                Rider.Hibiki.nameSound,
-                Rider.Ryuki.nameSound,
-                Rider.Faiz.nameSound,
-                Rider.Deno.nameSound,
-                Rider.Decade.nameSound,
-                Rider.Agito.nameSound,
-                Rider.Blade.nameSound,
-                // TODO 这个声音不该在这里
-                SoundKey.DeviceBoot21,
-            )
+            Rider.Kuuga,
+            Rider.Kiva,
+            Rider.Kabuto,
+            Rider.Hibiki,
+            Rider.Ryuki,
+            Rider.Faiz,
+            Rider.Deno,
+            Rider.Decade,
+            Rider.Agito,
+            Rider.Blade,
         )
     }
 
@@ -80,7 +75,8 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
         }
         when (currentState) {
             State.INIT -> {
-                if (iconManager.putPlayerList(rider)) {
+                if (!selectedRiderList.contains(rider)) {
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     SoundManager.play(rider.nameSound)
                     iconManager.playAnimation(rider)
@@ -88,8 +84,8 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
             }
 
             State.READY -> {
-                if (!fRiderList.contains(rider)) {
-                    fRiderList.add(rider)
+                if (!selectedRiderList.contains(rider)) {
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     SoundManager.play(rider.nameSound)
                     iconManager.playAnimation(rider)
@@ -103,18 +99,17 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
     private fun onDcdClick() {
         when (currentState) {
             State.INIT -> {
-                if (iconManager.playerIconCount == iconManager.riderIconCount - 1) {
+                if (selectedRiderList.size == iconManager.riderIconCount - 1) {
                     currentState = State.READY
                     val rider = Rider.Decade
-                    iconManager.putPlayerList(rider)
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     iconManager.playAnimation(rider) {
                         val sound = SoundKey.HeiseiDcdFinally
                         SoundManager.play(sound)
-                        neonManager?.cancel()
-                        neonManager = iconManager.neon()
-                        neonManager?.play(sound.time)?.start(true)
+                        newNeon().play(sound.time)?.start(true)
                     }
+                    selectedRiderList.clear()
                 } else {
                     // 这种情况下，就不操作吧
                     SoundManager.play(SoundKey.DeviceSpace)
@@ -135,16 +130,22 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
             }
 
             State.READY -> {
-                if (fRiderList.isEmpty()) {
+                if (selectedRiderList.isEmpty()) {
                     // 这种情况下，就不操作吧
                     SoundManager.play(SoundKey.DeviceSpace)
                 } else {
-                    for (rider in fRiderList) {
-                        iconManager.select(rider, false)
-                        // TODO 播放大招的声音，这里用临时的顶一下
-                        SoundManager.play(rider.nameSound)
+                    selectedRiderList.lastOrNull()?.let {
+                        SoundManager.play(it.skillSound)
+                        newNeon(true).play(
+                            listOf(
+                                RippleNeon.create(
+                                    iconManager.playerIndexOf(it),
+                                    it.skillSound.time
+                                )
+                            )
+                        )?.start(true)
                     }
-                    fRiderList.clear()
+                    selectedRiderList.clear()
                 }
             }
         }
@@ -152,8 +153,8 @@ class DcdHeisei10SubPage : HeiseiSubPage() {
 
     private fun onCClick() {
         SoundManager.play(SoundKey.DeviceSpace)
-        if (fRiderList.isNotEmpty()) {
-            fRiderList.clear()
+        if (selectedRiderList.isNotEmpty()) {
+            selectedRiderList.clear()
         } else {
             // TODO 退出的声音需要确认一下
             SoundManager.play(SoundKey.DeviceExit21)

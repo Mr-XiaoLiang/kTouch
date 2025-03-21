@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
+import com.lollipop.ktouch.base.neon.RippleNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei21Binding
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
@@ -14,31 +15,25 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
 
     private var binding: FragmentCardHeisei21Binding? = null
 
-    private val fRiderList = ArrayList<Rider>()
+    private val selectedRiderList = ArrayList<Rider>()
 
     private var currentState = State.INIT
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        SoundManager.preload(
+        preloadRider(
             context,
-            arrayOf(
-                SoundKey.DeviceSpace,
-                SoundKey.DeviceBoot,
-                Rider.Ghost.nameSound,
-                Rider.Drive.nameSound,
-                Rider.Gaim.nameSound,
-                Rider.Fourze.nameSound,
-                Rider.Wizard.nameSound,
-                Rider.Double.nameSound,
-                Rider.Build.nameSound,
-                Rider.Ooo.nameSound,
-                Rider.Zio.nameSound,
-                Rider.ExAid.nameSound,
-                Rider.Decade.nameSound,
-                // TODO 这个声音不该在这里
-                SoundKey.DeviceBoot21,
-            )
+            Rider.Ghost,
+            Rider.Drive,
+            Rider.Gaim,
+            Rider.Fourze,
+            Rider.Wizard,
+            Rider.Double,
+            Rider.Build,
+            Rider.Ooo,
+            Rider.Zio,
+            Rider.ExAid,
+            Rider.Decade,
         )
     }
 
@@ -81,21 +76,17 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
         }
         when (currentState) {
             State.INIT -> {
-                if (iconManager.putPlayerList(rider)) {
+                if (!selectedRiderList.contains(rider)) {
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     SoundManager.play(rider.nameSound)
-                    postDelay(rider.nameSound.time) {
-                        if (isPlayerRiderFilled()) {
-                            onRiderReady()
-                        }
-                    }
                     iconManager.playAnimation(rider)
                 }
             }
 
             State.READY -> {
-                if (!fRiderList.contains(rider)) {
-                    fRiderList.add(rider)
+                if (!selectedRiderList.contains(rider)) {
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     SoundManager.play(rider.nameSound)
                     iconManager.playAnimation(rider)
@@ -106,39 +97,20 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
         }
     }
 
-    private fun onRiderReady() {
-        if (currentState != State.INIT) {
-            return
-        }
-        neonManager?.cancel()
-        neonManager = iconManager.neon().also { neon ->
-            neon.play(listOf(MerryGoRoundNeon.Infinite))?.start(true)
-        }
-        // 这里还应该播放待机音效的，但是没找到，是一个来电话的声音
-    }
-
-    private fun isPlayerRiderFilled(): Boolean {
-        return iconManager.playerIconCount == iconManager.riderIconCount - 1
-    }
-
     private fun onDcdClick() {
         when (currentState) {
             State.INIT -> {
-                if (isPlayerRiderFilled()) {
-                    // 停止已有的动画
-                    neonManager?.cancel()
-                    neonManager = null
-                    // 开始准备变身
+                if (selectedRiderList.size == iconManager.riderIconCount - 1) {
                     currentState = State.READY
                     val rider = Rider.Decade
-                    iconManager.putPlayerList(rider)
+                    selectedRiderList.add(rider)
                     iconManager.select(rider, true)
                     iconManager.playAnimation(rider) {
-                        val sound = SoundKey.HeiseiDcdFinally21
+                        val sound = SoundKey.HeiseiDcdFinally
                         SoundManager.play(sound)
-                        neonManager = iconManager.neon()
-                        neonManager?.play(sound.time)?.start(true)
+                        newNeon().play(sound.time)?.start(true)
                     }
+                    selectedRiderList.clear()
                 } else {
                     // 这种情况下，就不操作吧
                     SoundManager.play(SoundKey.DeviceSpace)
@@ -159,16 +131,22 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
             }
 
             State.READY -> {
-                if (fRiderList.isEmpty()) {
+                if (selectedRiderList.isEmpty()) {
                     // 这种情况下，就不操作吧
                     SoundManager.play(SoundKey.DeviceSpace)
                 } else {
-                    for (rider in fRiderList) {
-                        iconManager.select(rider, false)
-                        // TODO 播放大招的声音，这里用临时的顶一下
-                        SoundManager.play(rider.nameSound)
+                    selectedRiderList.lastOrNull()?.let {
+                        SoundManager.play(it.skillSound)
+                        newNeon(true).play(
+                            listOf(
+                                RippleNeon.create(
+                                    iconManager.playerIndexOf(it),
+                                    it.skillSound.time
+                                )
+                            )
+                        )?.start(true)
                     }
-                    fRiderList.clear()
+                    selectedRiderList.clear()
                 }
             }
         }
@@ -176,8 +154,8 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
 
     private fun onCClick() {
         SoundManager.play(SoundKey.DeviceSpace)
-        if (fRiderList.isNotEmpty()) {
-            fRiderList.clear()
+        if (selectedRiderList.isNotEmpty()) {
+            selectedRiderList.clear()
         } else {
             // TODO 退出的声音需要确认一下
             SoundManager.play(SoundKey.DeviceExit21)
@@ -189,5 +167,4 @@ class DcdHeisei21SubPage : HeiseiSubPage() {
         INIT,
         READY,
     }
-
 }

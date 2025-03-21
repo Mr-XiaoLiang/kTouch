@@ -26,4 +26,33 @@ interface RiderIconAnimator {
         fun onRepeat(animation: Animator) {}
     }
 
+    class AnimationCallbackAdapter(
+        private val updateCallback: (value: Any) -> Unit = {},
+        private val startCallback: (animation: Animator) -> Unit = {},
+        private val endCallback: (animation: Animator) -> Unit = {},
+        private val cancelCallback: (animation: Animator) -> Unit = {},
+        private val repeatCallback: (animation: Animator) -> Unit = {}
+    ) : AnimationCallback {
+        override fun onUpdate(value: Any) {
+            updateCallback.invoke(value)
+        }
+
+        override fun onStart(animation: Animator) {
+            startCallback.invoke(animation)
+        }
+
+        override fun onEnd(animation: Animator) {
+            endCallback.invoke(animation)
+        }
+
+        override fun onCancel(animation: Animator) {
+            cancelCallback.invoke(animation)
+        }
+
+        override fun onRepeat(animation: Animator) {
+            repeatCallback.invoke(animation)
+        }
+
+    }
+
 }

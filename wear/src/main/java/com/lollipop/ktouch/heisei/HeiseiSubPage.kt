@@ -1,5 +1,6 @@
 package com.lollipop.ktouch.heisei
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,7 @@ import com.lollipop.ktouch.base.RiderIconManager
 import com.lollipop.ktouch.base.RiderIconNeonManager
 import com.lollipop.ktouch.base.SubPager
 import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.sound.SoundManager
 
 abstract class HeiseiSubPage : SubPager() {
 
@@ -21,6 +23,23 @@ abstract class HeiseiSubPage : SubPager() {
 
     private val mainHandler by lazy {
         Handler(Looper.getMainLooper())
+    }
+
+    protected fun preloadRider(context: Context, vararg riderArray: Rider) {
+        for (rider in riderArray) {
+            SoundManager.load(context, rider.nameSound)
+            SoundManager.load(context, rider.skillSound)
+        }
+    }
+
+    protected fun newNeon(clearOld: Boolean = true): RiderIconNeonManager {
+        if (clearOld) {
+            neonManager?.cancel()
+            neonManager = null
+        }
+        val neon = iconManager.neon()
+        neonManager = neon
+        return neon
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

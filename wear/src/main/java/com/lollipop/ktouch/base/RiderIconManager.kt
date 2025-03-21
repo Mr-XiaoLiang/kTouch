@@ -73,12 +73,16 @@ class RiderIconManager(
         playerList.clear()
     }
 
-    fun putPlayerList(rider: Rider): Boolean {
+    fun putPlayer(rider: Rider): Boolean {
         val iconDelegate = maskIconDelegateMap[rider] ?: return false
         if (playerList.contains(iconDelegate)) {
             return false
         }
         return playerList.add(iconDelegate)
+    }
+
+    fun playerIndexOf(rider: Rider): Int {
+        return playerList.indexOf(maskIconDelegateMap[rider])
     }
 
     fun removeAllRider() {
