@@ -19,6 +19,10 @@ abstract class HeiseiSubPage : SubPager() {
         RiderIconManager()
     }
 
+    protected val selectedRiderList = ArrayList<Rider>()
+
+    protected var currentState = State.INIT
+
     protected var neonManager: RiderIconNeonManager? = null
 
     private val mainHandler by lazy {
@@ -49,6 +53,7 @@ abstract class HeiseiSubPage : SubPager() {
 
     protected fun bindRider(rider: Rider, iconView: ImageView, maskView: ImageView?) {
         iconManager.bind(rider, iconView, maskView)
+        iconManager.putPlayer(rider)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,5 +68,10 @@ abstract class HeiseiSubPage : SubPager() {
     }
 
     protected abstract fun onRiderClick(rider: Rider)
+
+    enum class State {
+        INIT,
+        READY,
+    }
 
 }

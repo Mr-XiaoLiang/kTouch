@@ -28,7 +28,7 @@ object SoundManager {
 
     private fun createSoundPool(): SoundPool {
         val builder = SoundPool.Builder()
-        builder.setMaxStreams(SoundKey.entries.size)
+        builder.setMaxStreams(10)
         val attrBuilder = AudioAttributes.Builder()
         attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC)
         builder.setAudioAttributes(attrBuilder.build())
@@ -39,7 +39,7 @@ object SoundManager {
     fun isPlaying(soundKey: SoundKey): Boolean {
         soundIdMap[soundKey] ?: return false
         val startTime = soundPlayTimeMap[soundKey] ?: return false
-        return now() - startTime <= soundKey.time
+        return now() - startTime <= soundKey.timeMillis
     }
 
     private fun rememberPlay(soundKey: SoundKey, streamId: Int) {

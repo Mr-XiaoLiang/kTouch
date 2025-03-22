@@ -25,6 +25,7 @@ class RippleNeon(
         animator.setIntValues(0, (iconCount / 2))
         animator.setDuration(DURATION)
         animator.setRepeatCount(repeatCount)
+        animator.setRepeatByRestart()
         animator.addListener(IconGroupAnimationUpdateListener(startIndex, iconGroup))
     }
 

@@ -26,8 +26,8 @@ class RiderIconNeonManager(
         currentTrain?.cancel(pre = true, next = true)
     }
 
-    fun play(maxTime: Long): AnimationTrain? {
-        return play(randomStep(maxTime))
+    fun play(maxTimeSecond: Long): AnimationTrain? {
+        return play(randomStep(maxTimeSecond))
     }
 
     fun play(stepList: List<NeonStep>): AnimationTrain? {
@@ -45,8 +45,8 @@ class RiderIconNeonManager(
         return train
     }
 
-    fun randomStep(maxTime: Long): List<NeonStep> {
-        var freeTime = maxTime
+    fun randomStep(maxTimeSecond: Long): List<NeonStep> {
+        var freeTime = maxTimeSecond * 1000
         val resultList = ArrayList<NeonStep>()
         val tempList = ArrayList<NeonStep>()
         while (freeTime > 0) {

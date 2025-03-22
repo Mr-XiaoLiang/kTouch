@@ -11,7 +11,7 @@ sealed class MerryGoRoundNeon : RiderIconNeonManager.NeonStep() {
     override fun buildTrain(iconGroup: RiderIconGroup, animator: RiderIconAnimator) {
         val iconCount = iconGroup.playerIconCount
         animator.setIntValues(0, iconCount - 1)
-        animator.setDuration(OrderlyNeon.duration)
+        animator.setDuration(duration)
         animator.addListener(
             IconGroupAnimationUpdateListener(iconGroup)
         )

@@ -4,7 +4,7 @@ import com.lollipop.resource.R
 
 enum class SoundKey(
     val resId: Int,
-    val time: Long
+    val timeSecond: Long
 ) {
 
     DeviceBoot(R.raw.s_device_boot, 4),
@@ -57,6 +57,8 @@ enum class SoundKey(
     SkillRyuki(R.raw.s_skill_ryuki, 10),
     SkillWizard(R.raw.s_skill_wizard, 11),
     SkillZeroOne(R.raw.s_skill_zero_one, 9),
-    SkillZio(R.raw.s_skill_zio, 11),
+    SkillZio(R.raw.s_skill_zio, 11);
+
+    val timeMillis = timeSecond * 1000
 
 }
