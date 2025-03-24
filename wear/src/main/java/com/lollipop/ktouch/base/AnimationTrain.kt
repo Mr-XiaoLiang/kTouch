@@ -58,6 +58,24 @@ class AnimationTrain private constructor() : RiderIconAnimator {
         return next
     }
 
+    fun allDuration(): Long {
+        if (prevNode != null) {
+            return first().allDuration()
+        }
+        var durationLength = 0L
+        var train: AnimationTrain? = this
+        while (train != null) {
+            durationLength += train.animator.duration
+            val trainRepeatCount = train.animator.repeatCount
+            if (trainRepeatCount == ValueAnimator.INFINITE) {
+                return -1L
+            }
+            durationLength += (trainRepeatCount * train.animator.duration)
+            train = train.nextNode
+        }
+        return durationLength
+    }
+
     private fun onUpdate(anim: ValueAnimator) {
         animationCallbackList.forEach {
             it.onUpdate(anim.animatedValue)

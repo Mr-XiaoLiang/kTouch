@@ -11,7 +11,7 @@ class RippleNeon(
 
     companion object {
 
-        private const val DURATION = 1000L
+        private const val DURATION = 500L
 
         fun create(startIndex: Int, duration: Long): RippleNeon {
             return RippleNeon(startIndex, (duration / DURATION).toInt())
@@ -24,7 +24,7 @@ class RippleNeon(
         val iconCount = iconGroup.playerIconCount
         animator.setIntValues(0, (iconCount / 2))
         animator.setDuration(DURATION)
-        animator.setRepeatCount(repeatCount)
+        animator.setRepeatCount(repeatCount - 1)
         animator.setRepeatByRestart()
         animator.addListener(IconGroupAnimationUpdateListener(startIndex, iconGroup))
     }

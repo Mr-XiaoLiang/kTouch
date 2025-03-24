@@ -1,5 +1,6 @@
 package com.lollipop.ktouch.base
 
+import android.util.Log
 import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
 import com.lollipop.ktouch.base.neon.OrderlyNeon
 
@@ -27,6 +28,7 @@ class RiderIconNeonManager(
     }
 
     fun play(maxTimeSecond: Long): AnimationTrain? {
+//        Log.d("RiderIconNeonManager", "play.maxTimeSecond: $maxTimeSecond")
         return play(randomStep(maxTimeSecond))
     }
 
@@ -42,6 +44,7 @@ class RiderIconNeonManager(
         }
         currentTrain?.cancel(pre = true, next = true)
         currentTrain = train
+//        Log.d("RiderIconNeonManager", "play.allDuration: ${train?.allDuration() ?: 0}")
         return train
     }
 
@@ -62,8 +65,10 @@ class RiderIconNeonManager(
                 }
             }
             if (tempList.isEmpty()) {
-                if (min != null) {
-                    resultList.add(min)
+                if (resultList.isEmpty()) {
+                    if (min != null) {
+                        resultList.add(min)
+                    }
                 }
                 return resultList
             } else {

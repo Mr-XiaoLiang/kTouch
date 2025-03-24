@@ -6,7 +6,7 @@ import com.lollipop.ktouch.base.RiderIconNeonManager
 
 object OrderlyNeon : RiderIconNeonManager.NeonStep() {
 
-    override val duration: Long = 2 * 1000L
+    override val duration: Long = 1000L
     override fun buildTrain(iconGroup: RiderIconGroup, animator: RiderIconAnimator) {
         val iconCount = iconGroup.playerIconCount
         animator.setIntValues(0, (iconCount * 2))
