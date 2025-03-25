@@ -2,6 +2,7 @@ package com.lollipop.ktouch.base
 
 import android.util.Log
 import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
+import com.lollipop.ktouch.base.neon.OddEvenNeon
 import com.lollipop.ktouch.base.neon.OrderlyNeon
 
 class RiderIconNeonManager(
@@ -10,8 +11,9 @@ class RiderIconNeonManager(
 
     companion object {
         val NEON_STYLE_LIST: List<NeonStep> = listOf(
-            OrderlyNeon,
-            MerryGoRoundNeon.Default
+//            OrderlyNeon,
+//            MerryGoRoundNeon.Default,
+            OddEvenNeon
         )
     }
 

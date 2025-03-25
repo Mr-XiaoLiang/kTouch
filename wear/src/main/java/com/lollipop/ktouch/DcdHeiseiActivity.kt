@@ -16,9 +16,4 @@ class DcdHeiseiActivity : PagerActivity() {
         )
     }
 
-    override fun finish() {
-        super.finish()
-        SoundManager.play(SoundKey.DeviceExit21)
-    }
-
 }

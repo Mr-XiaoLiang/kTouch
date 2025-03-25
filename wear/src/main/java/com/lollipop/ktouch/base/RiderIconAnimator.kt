@@ -13,6 +13,13 @@ interface RiderIconAnimator {
     fun setRepeatInfinite()
     fun setRepeatByRestart()
     fun setRepeatByReverse()
+    fun setAllDuration(allDuration: Long, repeatCount: Int) {
+        if (repeatCount < 0) {
+            throw IllegalArgumentException("repeatCount must be >= 0")
+        }
+        setDuration(allDuration / (repeatCount + 1))
+        setRepeatCount(repeatCount)
+    }
 
     interface AnimationCallback {
         fun onUpdate(value: Any)
