@@ -120,10 +120,10 @@ object SoundManager {
     private class ShortSoundPlayerDelegate : SoundPlayer {
 
         companion object {
-            const val MAX_SOUND_TIME_S = 6L
+            const val MAX_SOUND_TIME_S = 6000L
 
             fun canLoad(soundKey: SoundKey): Boolean {
-                return soundKey.timeSecond <= MAX_SOUND_TIME_S
+                return soundKey.timeMillis <= MAX_SOUND_TIME_S
             }
 
         }
@@ -156,7 +156,7 @@ object SoundManager {
 
         override fun canLoad(soundKey: SoundKey): Boolean {
             // 没加载过就不管能不能加载了，毕竟有很多音频超过了10S
-            return freeSoundTime >= soundKey.timeSecond
+            return freeSoundTime >= soundKey.timeMillis
         }
 
         override fun play(soundKey: SoundKey) {
@@ -186,7 +186,7 @@ object SoundManager {
             }
             if (canLoad(soundKey)) {
                 val id = soundPool.load(context, soundKey.resId, 1)
-                soundTimeLength += soundKey.timeSecond
+                soundTimeLength += soundKey.timeMillis
                 soundIdMap[soundKey] = id
                 loadSound.add(soundKey)
                 return true

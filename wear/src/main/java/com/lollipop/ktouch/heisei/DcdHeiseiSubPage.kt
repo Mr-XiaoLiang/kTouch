@@ -51,7 +51,7 @@ abstract class DcdHeiseiSubPage : HeiseiSubPage() {
                     iconManager.playAnimation(rider) {
                         val sound = heiseiSound()
                         SoundManager.play(sound)
-                        newNeon().play(sound.timeSecond)?.also {
+                        newNeon().play(sound.timeMillis)?.also {
                             it.addListener(
                                 RiderIconAnimator.AnimationCallbackAdapter(
                                     endCallback = {
