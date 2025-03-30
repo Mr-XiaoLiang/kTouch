@@ -2,13 +2,13 @@ package com.lollipop.ktouch.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Point
 import android.graphics.PointF
-import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 class ArcTouchLayout @JvmOverloads constructor(
     context: Context,
@@ -21,17 +21,44 @@ class ArcTouchLayout @JvmOverloads constructor(
         const val POSITION_PARENT_RIGHT = -3
         const val POSITION_PARENT_BOTTOM = -4
         const val POSITION_PARENT_CENTER = -5
+
+        private fun getLength(
+            x1: Float,
+            y1: Float,
+            x2: Float,
+            y2: Float
+        ): Float {
+            return kotlin.math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+        }
+
     }
 
-    private val restrictedZoneList = ArrayList<Rect>()
-    private val touchCircleCenter = Point()
+    private val restrictedZoneList = ArrayList<RestrictedZone>()
+    private val touchCircleCenter = PointF()
+    private var arcTouchListener: OnArcTouchListener? = null
 
     private var touchSlop = 0
     private val touchDownPoint = PointF()
     private var touchMode = TouchMode.NONE
 
-    fun addRestrictedZone(rect: Rect) {
-        restrictedZoneList.add(rect)
+    fun addRestrictedZone(zone: RestrictedZone) {
+        restrictedZoneList.add(zone)
+    }
+
+    fun clearRestrictedZone() {
+        restrictedZoneList.clear()
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        val contentLeft = paddingLeft
+        val contentRight = width - paddingRight
+        val contentTop = paddingTop
+        val contentBottom = height - paddingBottom
+        touchCircleCenter.set(
+            (contentRight + contentLeft) * 0.5F,
+            (contentBottom + contentTop) * 0.5F
+        )
     }
 
     private fun onTouchDown(event: MotionEvent) {
@@ -56,15 +83,17 @@ class ArcTouchLayout @JvmOverloads constructor(
                     return true
                 }
             }
+
             MotionEvent.ACTION_CANCEL -> {
                 touchMode = TouchMode.CANCELED
             }
+
             MotionEvent.ACTION_POINTER_DOWN -> {
                 // 超过一个手指之后，放弃吧
                 touchMode = TouchMode.CANCELED
             }
         }
-        return super.onInterceptTouchEvent(ev)
+        return super.onInterceptTouchEvent(ev) || touchMode == TouchMode.HOLD
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -90,11 +119,24 @@ class ArcTouchLayout @JvmOverloads constructor(
                 touchMode = TouchMode.CANCELED
             }
         }
-        return super.onTouchEvent(event)
+        return touchMode == TouchMode.HOLD || super.onTouchEvent(event)
     }
 
     private fun onTouchMove(event: MotionEvent) {
-        // TODO
+        val listener = arcTouchListener ?: return
+        val touchX = event.x
+        val touchY = event.y
+        val radius = getTouchPointRadius(touchX, touchY)
+        val angle = getTouchPointAngle(touchX, touchY)
+        listener.onTouch(
+            this,
+            angle,
+            radius,
+            touchCircleCenter.x,
+            touchCircleCenter.y,
+            touchX,
+            touchY
+        )
     }
 
     private fun needIntercept(x: Float, y: Float): Boolean {
@@ -102,8 +144,10 @@ class ArcTouchLayout @JvmOverloads constructor(
             TouchMode.NONE -> {
                 val touchDownX = touchDownPoint.x
                 val touchDownY = touchDownPoint.y
-                for (rect in restrictedZoneList) {
-                    if (isTouchOnRestricted(rect, touchDownX, touchDownY)) {
+                val viewWidth = width
+                val viewHeight = height
+                for (zone in restrictedZoneList) {
+                    if (zone.isTouchOnRestricted(viewWidth, viewHeight, touchDownX, touchDownY)) {
                         touchMode = TouchMode.CANCELED
                         return false
                     }
@@ -132,88 +176,149 @@ class ArcTouchLayout @JvmOverloads constructor(
         }
     }
 
-    private fun isTouchOnRestricted(rect: Rect, x: Float, y: Float): Boolean {
-        val l = getRestrictedPosition(rect.left, true)
-        val t = getRestrictedPosition(rect.top, false)
-        val r = getRestrictedPosition(rect.right, true)
-        val b = getRestrictedPosition(rect.bottom, false)
-        return x >= l && x <= r && y >= t && y <= b
+    private fun getTouchPointRadius(touchX: Float, touchY: Float): Float {
+        val centerX = touchCircleCenter.x
+        val centerY = touchCircleCenter.y
+        return getLength(touchX, touchY, centerX, centerY)
     }
 
-    private fun getRestrictedPosition(value: Int, isHorizontal: Boolean): Int {
-        when (value) {
-            POSITION_PARENT_LEFT -> {
-                return 0
+    private fun getTouchPointAngle(touchX: Float, touchY: Float): Float {
+        val centerX = touchCircleCenter.x
+        val centerY = touchCircleCenter.y
+        return DeviceHelper.calculateCentralAngle(
+            centerX, centerY, // 圆心
+            centerX, 0F, // 锚点是View12点钟的点
+            touchX, touchY
+        )
+    }
+
+    interface OnArcTouchListener {
+        fun onTouch(
+            view: ArcTouchLayout,
+            angle: Float,
+            radius: Float,
+            centerX: Float,
+            centerY: Float,
+            touchX: Float,
+            touchY: Float
+        )
+    }
+
+    sealed class RestrictedZone {
+
+        abstract fun isTouchOnRestricted(
+            viewWidth: Int,
+            viewHeight: Int,
+            x: Float,
+            y: Float
+        ): Boolean
+
+        class Rect(
+            val left: Int,
+            val top: Int,
+            val right: Int,
+            val bottom: Int
+        ) : RestrictedZone() {
+
+            override fun isTouchOnRestricted(
+                viewWidth: Int,
+                viewHeight: Int,
+                x: Float,
+                y: Float
+            ): Boolean {
+                val l = getRestrictedPosition(viewWidth, viewHeight, left, true)
+                val t = getRestrictedPosition(viewWidth, viewHeight, top, false)
+                val r = getRestrictedPosition(viewWidth, viewHeight, right, true)
+                val b = getRestrictedPosition(viewWidth, viewHeight, bottom, false)
+                return x >= l && x <= r && y >= t && y <= b
             }
 
-            POSITION_PARENT_TOP -> {
-                return 0
-            }
+            private fun getRestrictedPosition(
+                viewWidth: Int,
+                viewHeight: Int,
+                value: Int,
+                isHorizontal: Boolean
+            ): Int {
+                when (value) {
+                    POSITION_PARENT_LEFT -> {
+                        return 0
+                    }
 
-            POSITION_PARENT_RIGHT -> {
-                return width
-            }
+                    POSITION_PARENT_TOP -> {
+                        return 0
+                    }
 
-            POSITION_PARENT_BOTTOM -> {
-                return height
-            }
+                    POSITION_PARENT_RIGHT -> {
+                        return viewWidth
+                    }
 
-            POSITION_PARENT_CENTER -> {
-                if (isHorizontal) {
-                    return width / 2
-                } else {
-                    return height / 2
+                    POSITION_PARENT_BOTTOM -> {
+                        return viewHeight
+                    }
+
+                    POSITION_PARENT_CENTER -> {
+                        return if (isHorizontal) {
+                            viewWidth / 2
+                        } else {
+                            viewHeight / 2
+                        }
+                    }
+
+                    else -> {
+                        return value
+                    }
                 }
             }
 
-            else -> {
-                return value
-            }
         }
-    }
 
-    sealed class TouchCircleCenter {
+        class Circle(
+            val radiusFrom: Int,
+            val radiusTo: Int,
+        ) : RestrictedZone() {
 
-        abstract fun getAngle(
-            viewWidth: Int,
-            viewHeight: Int,
-            touchX: Int,
-            touchY: Int,
-            outInfo: TouchCircle
-        )
-
-        class Absolute(val x: Int, val y: Int) : TouchCircleCenter() {
-            override fun getAngle(
+            override fun isTouchOnRestricted(
                 viewWidth: Int,
                 viewHeight: Int,
-                touchX: Int,
-                touchY: Int,
-                outInfo: TouchCircle
-            ) {
-                TODO("Not yet implemented")
+                x: Float,
+                y: Float
+            ): Boolean {
+                val centerX = viewWidth * 0.5F
+                val centerY = viewHeight * 0.5F
+                val radius = getLength(centerX, centerY, x, y)
+                return radius >= radiusFrom && radius <= radiusTo
             }
+
         }
 
-        class Weight(val x: Float, val y: Float, val padding: Rect) : TouchCircleCenter() {
-            override fun getAngle(
+        class Annulus(
+            val width: Int,
+            val offset: Int,
+            val insideMode: Boolean,
+        ) : RestrictedZone() {
+
+            override fun isTouchOnRestricted(
                 viewWidth: Int,
                 viewHeight: Int,
-                touchX: Int,
-                touchY: Int,
-                outInfo: TouchCircle
-            ) {
-                TODO("Not yet implemented")
+                x: Float,
+                y: Float
+            ): Boolean {
+                val maxRadius = if (insideMode) {
+                    min(viewWidth, viewHeight) / 2
+                } else {
+                    max(viewWidth, viewHeight) / 2
+                }
+                val radiusTo = maxRadius - offset
+                val radiusFrom = radiusTo - width
+                val centerX = viewWidth * 0.5F
+                val centerY = viewHeight * 0.5F
+                val radius = getLength(centerX, centerY, x, y)
+                return radius >= radiusFrom && radius <= radiusTo
             }
+
         }
 
     }
-
-    class TouchCircle(
-        var angle: Float,
-        var radius: Float,
-        var centerX: Float,
-        var centerY: Float
-    )
 
     private enum class TouchMode {
         /**
@@ -236,7 +341,6 @@ class ArcTouchLayout @JvmOverloads constructor(
          * 拦截手势，表示自己在处理了
          */
         HOLD,
-
 
     }
 
