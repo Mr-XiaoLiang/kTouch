@@ -1,6 +1,7 @@
 package com.lollipop.ktouch.heisei
 
 import com.lollipop.ktouch.base.RiderIconAnimator
+import com.lollipop.ktouch.widget.ArcTouchLayout
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
 import com.lollipop.resource.sound.SoundManager
@@ -73,6 +74,35 @@ abstract class DcdHeiseiSubPage : HeiseiSubPage() {
                 SoundManager.play(SoundKey.NameDecade)
             }
         }
+    }
+
+    protected class RiderTouchAdapter(
+        private val riderArray: Array<Rider>,
+        private val listener: (Rider) -> Unit
+    ) : ArcTouchLayout.OnArcTouchListener {
+
+        private val stepAngle = 360F / riderArray.size
+        private val halfAngle = stepAngle / 2F
+
+        private var selectIndex = -1
+
+        override fun onTouch(
+            view: ArcTouchLayout,
+            angle: Float,
+            radius: Float,
+            centerX: Float,
+            centerY: Float,
+            touchX: Float,
+            touchY: Float
+        ) {
+            var index = ((angle + halfAngle) / stepAngle + 1).toInt()
+            index %= riderArray.size
+            if (selectIndex != index) {
+                selectIndex = index
+                listener(riderArray[index])
+            }
+        }
+
     }
 
 }
