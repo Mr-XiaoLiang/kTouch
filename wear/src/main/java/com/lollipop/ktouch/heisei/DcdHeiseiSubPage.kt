@@ -76,8 +76,19 @@ abstract class DcdHeiseiSubPage : HeiseiSubPage() {
         }
     }
 
+    protected fun bindRiderTouch(
+        arcTouchLayout: ArcTouchLayout,
+        vararg rider: Rider
+    ): RiderTouchAdapter {
+        val touchAdapter = RiderTouchAdapter(rider) {
+            onRiderClick(it)
+        }
+        arcTouchLayout.setOnArcTouchListener(touchAdapter)
+        return touchAdapter
+    }
+
     protected class RiderTouchAdapter(
-        private val riderArray: Array<Rider>,
+        private val riderArray: Array<out Rider>,
         private val listener: (Rider) -> Unit
     ) : ArcTouchLayout.OnArcTouchListener {
 

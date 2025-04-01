@@ -95,10 +95,10 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
                         )?.also { anim ->
                             anim.addListener(
                                 RiderIconAnimator.AnimationCallbackAdapter(
-                                endCallback = {
-                                    iconManager.selectOnly(-1)
-                                }
-                            ))
+                                    endCallback = {
+                                        iconManager.selectOnly(-1)
+                                    }
+                                ))
                             anim.start(true)
                         }
                     }

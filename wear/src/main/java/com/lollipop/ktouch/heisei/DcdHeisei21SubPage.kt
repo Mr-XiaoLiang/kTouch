@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.base.RiderIconAnimator
-import com.lollipop.ktouch.base.neon.MerryGoRoundNeon
 import com.lollipop.ktouch.base.neon.RippleNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei21Binding
 import com.lollipop.resource.sound.Rider
