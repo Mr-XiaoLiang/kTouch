@@ -2,6 +2,7 @@ package com.lollipop.ktouch.heisei
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.base.RiderIconAnimator
@@ -33,10 +34,17 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
         )
     }
 
-    override fun createContentView(parent: ViewGroup): View {
-        val newBinding = FragmentCardHeisei10Binding.inflate(layoutInflater, parent, false)
-        this.binding = newBinding
-        return newBinding.root
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val heisei10Binding = FragmentCardHeisei10Binding.inflate(
+            inflater, container, false
+        )
+        this.binding = heisei10Binding
+        return heisei10Binding.root
     }
 
     override fun heiseiSound(): SoundKey {
@@ -63,6 +71,19 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
             cancelImageView.setOnClickListener {
                 onCClick()
             }
+
+            bindRiderTouch(
+                arcLayout,
+                Rider.Kuuga,
+                Rider.Agito,
+                Rider.Ryuki,
+                Rider.Faiz,
+                Rider.Blade,
+                Rider.Hibiki,
+                Rider.Kabuto,
+                Rider.Deno,
+                Rider.Kiva,
+            )
         }
     }
 

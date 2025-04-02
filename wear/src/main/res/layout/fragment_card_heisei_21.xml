@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lollipop.ktouch.widget.ArcLayout
+    <com.lollipop.ktouch.widget.ArcTouchLayout
+        android:id="@+id/arcLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -296,6 +297,6 @@
             app:layout_arc_sizeMode="minEdge"
             app:layout_arc_widthPercent="0.25" />
 
-    </com.lollipop.ktouch.widget.ArcLayout>
+    </com.lollipop.ktouch.widget.ArcTouchLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

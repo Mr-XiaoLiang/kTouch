@@ -2,6 +2,7 @@ package com.lollipop.ktouch.base
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.databinding.FragmentSingleRiderBinding
@@ -52,8 +53,14 @@ abstract class SingleRiderPage : SubPager() {
         callback?.onRiderClick(optRider())
     }
 
-    override fun createContentView(parent: ViewGroup): View {
-        val newBinding = FragmentSingleRiderBinding.inflate(layoutInflater, parent, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val newBinding = FragmentSingleRiderBinding.inflate(
+            inflater, container, false
+        )
         contentBinding = newBinding
         return newBinding.root
     }

@@ -9,9 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.lollipop.ktouch.databinding.ActivityPageManagerBinding
 
-abstract class PagerActivity : AppCompatActivity(), SubPager.Callback {
-
-    private var currentPageMode = SubPageMode.Display
+abstract class PagerActivity : AppCompatActivity() {
 
     private val binding by lazy {
         ActivityPageManagerBinding.inflate(layoutInflater)
@@ -33,16 +31,19 @@ abstract class PagerActivity : AppCompatActivity(), SubPager.Callback {
         setContentView(binding.root)
         binding.viewPager.adapter = PagerAdapter(this, pageArray)
         binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        notifyPagerModeChange(SubPageMode.Display)
         binding.pageIndicator.bind(binding.viewPager)
+        binding.viewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrollStateChanged(state: Int) {
+                    postIndicatorChanged(state == ViewPager2.SCROLL_STATE_IDLE)
+                }
+            }
+        )
+        isPagerScrollEnabled(false)
     }
 
-    override fun getSubPageMode(): SubPageMode {
-        return currentPageMode
-    }
-
-    override fun postPageMode(mode: SubPageMode) {
-        notifyPagerModeChange(mode)
+    protected fun isPagerScrollEnabled(enable: Boolean) {
+        binding.viewPager.isUserInputEnabled = enable
     }
 
     private fun hideIndicator() {
@@ -63,26 +64,13 @@ abstract class PagerActivity : AppCompatActivity(), SubPager.Callback {
         }
     }
 
-    private fun notifyPagerModeChange(newMode: SubPageMode) {
-        binding.viewPager.isUserInputEnabled = newMode == SubPageMode.Edit
-        currentPageMode = newMode
-        supportFragmentManager.fragments.forEach {
-            if (it is SubPager) {
-                if (it.isResumed && it.isVisible) {
-                    it.onPageModeChange(newMode)
-                }
-            }
-        }
-        postIndicatorChanged()
-    }
-
     override fun onResume() {
         super.onResume()
-        postIndicatorChanged()
+        postIndicatorChanged(true)
     }
 
-    private fun postIndicatorChanged() {
-        if (currentPageMode == SubPageMode.Display) {
+    private fun postIndicatorChanged(isIdle: Boolean) {
+        if (isIdle) {
             mainHandler.removeCallbacks(autoHideIndicatorTask)
             mainHandler.postDelayed(autoHideIndicatorTask, 3000)
         } else {

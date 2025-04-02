@@ -16,4 +16,6 @@
     <style name="MainActivityTheme.Starting" parent="L.Theme.Activity.Swipe">
         <item name="android:windowSwipeToDismiss">true</item>
     </style>
+
+
 </resources>

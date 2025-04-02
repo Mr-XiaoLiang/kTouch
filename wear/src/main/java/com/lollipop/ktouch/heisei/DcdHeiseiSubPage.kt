@@ -106,12 +106,16 @@ abstract class DcdHeiseiSubPage : HeiseiSubPage() {
             touchX: Float,
             touchY: Float
         ) {
-            var index = ((angle + halfAngle) / stepAngle + 1).toInt()
+            var index = ((angle + halfAngle) / stepAngle).toInt()
             index %= riderArray.size
             if (selectIndex != index) {
                 selectIndex = index
                 listener(riderArray[index])
             }
+        }
+
+        override fun onTouchUp() {
+            selectIndex = -1
         }
 
     }

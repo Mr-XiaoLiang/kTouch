@@ -28,7 +28,8 @@
         <activity
             android:name=".DcdHeiseiActivity"
             android:exported="false"
-            android:taskAffinity="" />
+            android:taskAffinity=""
+            android:theme="@style/L.Theme.Activity.Swipe" />
     </application>
 
 </manifest>

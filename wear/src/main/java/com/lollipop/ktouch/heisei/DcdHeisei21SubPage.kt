@@ -2,6 +2,7 @@ package com.lollipop.ktouch.heisei
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.base.RiderIconAnimator
@@ -34,8 +35,14 @@ class DcdHeisei21SubPage : DcdHeiseiSubPage() {
         )
     }
 
-    override fun createContentView(parent: ViewGroup): View {
-        val newBinding = FragmentCardHeisei21Binding.inflate(layoutInflater, parent, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val newBinding = FragmentCardHeisei21Binding.inflate(
+            inflater, container, false
+        )
         this.binding = newBinding
         return newBinding.root
     }
@@ -57,6 +64,20 @@ class DcdHeisei21SubPage : DcdHeiseiSubPage() {
 
             funcImageView.setOnClickListener { onFClick() }
             cancelImageView.setOnClickListener { onCClick() }
+
+            bindRiderTouch(
+                arcLayout,
+                Rider.Double,
+                Rider.Ooo,
+                Rider.Fourze,
+                Rider.Wizard,
+                Rider.Gaim,
+                Rider.Drive,
+                Rider.Ghost,
+                Rider.ExAid,
+                Rider.Build,
+                Rider.Zio,
+            )
         }
     }
 

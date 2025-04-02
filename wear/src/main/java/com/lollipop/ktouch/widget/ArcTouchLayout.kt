@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PointF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import kotlin.math.abs
@@ -68,31 +67,34 @@ class ArcTouchLayout @JvmOverloads constructor(
         touchMode = TouchMode.NONE
     }
 
-    private fun log(value: String) {
-        Log.d("ArcTouchLayout", value)
-    }
+//    private fun log(value: String) {
+//        Log.d("ArcTouchLayout", value)
+//    }
 
     private fun cancelTouch() {
-        log("cancelTouch, requestDisallowInterceptTouchEvent = false")
+//        log("cancelTouch, requestDisallowInterceptTouchEvent = false")
+        if (touchMode == TouchMode.HOLD) {
+            onTouchUp()
+        }
         touchMode = TouchMode.CANCELED
         parent?.requestDisallowInterceptTouchEvent(false)
     }
 
     private fun requestTouch() {
-        log("requestTouch, requestDisallowInterceptTouchEvent = true")
+//        log("requestTouch, requestDisallowInterceptTouchEvent = true")
         parent?.requestDisallowInterceptTouchEvent(true)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        log("dispatchTouchEvent.${ev?.actionMasked}")
+//        log("dispatchTouchEvent.${ev?.actionMasked}")
         return super.dispatchTouchEvent(ev)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        log("onInterceptTouchEvent.${ev?.actionMasked}")
+//        log("onInterceptTouchEvent.${ev?.actionMasked}")
         when (ev?.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                log("onInterceptTouchEvent.ACTION_DOWN")
+//                log("onInterceptTouchEvent.ACTION_DOWN")
                 onTouchDown(ev)
                 if (needIntercept(ev.x, ev.y)) {
                     requestTouch()
@@ -101,7 +103,7 @@ class ArcTouchLayout @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_MOVE -> {
-                log("onInterceptTouchEvent.ACTION_MOVE")
+//                log("onInterceptTouchEvent.ACTION_MOVE")
                 if (needIntercept(ev.x, ev.y)) {
                     requestTouch()
                     return true
@@ -109,31 +111,31 @@ class ArcTouchLayout @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_CANCEL -> {
-                log("onInterceptTouchEvent.ACTION_CANCEL")
+//                log("onInterceptTouchEvent.ACTION_CANCEL")
                 cancelTouch()
             }
 
             MotionEvent.ACTION_POINTER_DOWN -> {
-                log("onInterceptTouchEvent.ACTION_POINTER_DOWN")
+//                log("onInterceptTouchEvent.ACTION_POINTER_DOWN")
                 // 超过一个手指之后，放弃吧
                 cancelTouch()
             }
         }
         if (touchMode == TouchMode.HOLD) {
-            log("onInterceptTouchEvent.THIS.result = true")
+//            log("onInterceptTouchEvent.THIS.result = true")
             return true
         }
         val result = super.onInterceptTouchEvent(ev)
-        log("onInterceptTouchEvent.SUPER.result = $result")
+//        log("onInterceptTouchEvent.SUPER.result = $result")
         return result
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        log("onTouchEvent.${event?.actionMasked}")
+//        log("onTouchEvent.${event?.actionMasked}")
         when (event?.actionMasked) {
             MotionEvent.ACTION_MOVE -> {
-                log("onTouchEvent.ACTION_MOVE")
+//                log("onTouchEvent.ACTION_MOVE")
                 if (needIntercept(event.x, event.y)) {
                     onTouchMove(event)
                     return true
@@ -141,27 +143,27 @@ class ArcTouchLayout @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_POINTER_DOWN -> {
-                log("onTouchEvent.ACTION_POINTER_DOWN")
+//                log("onTouchEvent.ACTION_POINTER_DOWN")
                 // 超过一个手指之后，放弃吧
                 cancelTouch()
             }
 
             MotionEvent.ACTION_UP -> {
-                log("onTouchEvent.ACTION_UP")
+//                log("onTouchEvent.ACTION_UP")
                 cancelTouch()
             }
 
             MotionEvent.ACTION_CANCEL -> {
-                log("onTouchEvent.ACTION_CANCEL")
+//                log("onTouchEvent.ACTION_CANCEL")
                 cancelTouch()
             }
         }
         if (touchMode == TouchMode.HOLD) {
-            log("onTouchEvent.THIS.result = true")
+//            log("onTouchEvent.THIS.result = true")
             return true
         }
         val result = super.onTouchEvent(event)
-        log("onTouchEvent.SUPER.result = $result")
+//        log("onTouchEvent.SUPER.result = $result")
         return result
     }
 
@@ -182,8 +184,13 @@ class ArcTouchLayout @JvmOverloads constructor(
         )
     }
 
+    private fun onTouchUp() {
+        val listener = arcTouchListener ?: return
+        listener.onTouchUp()
+    }
+
     private fun needIntercept(x: Float, y: Float): Boolean {
-        log("needIntercept.[$x, $y]")
+//        log("needIntercept.[$x, $y]")
         when (touchMode) {
             TouchMode.NONE -> {
                 val touchDownX = touchDownPoint.x
@@ -192,12 +199,12 @@ class ArcTouchLayout @JvmOverloads constructor(
                 val viewHeight = height
                 for (zone in restrictedZoneList) {
                     if (zone.isTouchOnRestricted(viewWidth, viewHeight, touchDownX, touchDownY)) {
-                        touchMode = TouchMode.CANCELED
-                        log("needIntercept.CANCELED")
+                        cancelTouch()
+//                        log("needIntercept.CANCELED")
                         return false
                     }
                 }
-                log("needIntercept.PENDING")
+//                log("needIntercept.PENDING")
                 touchMode = TouchMode.PENDING
                 return false
             }
@@ -206,7 +213,7 @@ class ArcTouchLayout @JvmOverloads constructor(
                 // 等待了，所以只管判断是否超过滑动阈值就行
                 if (abs(x - touchDownPoint.x) > touchSlop || abs(y - touchDownPoint.y) > touchSlop) {
                     touchMode = TouchMode.HOLD
-                    log("needIntercept.HOLD")
+//                    log("needIntercept.HOLD")
                     return true
                 } else {
                     return false
@@ -253,6 +260,8 @@ class ArcTouchLayout @JvmOverloads constructor(
             touchX: Float,
             touchY: Float
         )
+
+        fun onTouchUp()
     }
 
     sealed class RestrictedZone {
