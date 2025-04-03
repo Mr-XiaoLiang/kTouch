@@ -30,14 +30,6 @@ abstract class SingleRiderPage : SubPager() {
         callback = null
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        context?.let { c ->
-            SoundManager.load(c, optRider().nameSound)
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         contentBinding?.apply {

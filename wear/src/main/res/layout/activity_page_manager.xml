@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="#333">
 
     <FrameLayout
         android:layout_width="0px"
@@ -13,6 +13,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.wear.widget.CurvedTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/copyright"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"

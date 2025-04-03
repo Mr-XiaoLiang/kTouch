@@ -1,18 +1,17 @@
 package com.lollipop.ktouch
 
-import android.content.Intent
 import com.lollipop.ktouch.base.PagerActivity
 import com.lollipop.ktouch.base.SubPager
-import com.lollipop.ktouch.main.MainRiderPage
-import com.lollipop.resource.sound.Rider
+import com.lollipop.ktouch.main.DecadeRiderPage
 import com.lollipop.resource.sound.SoundKey
 import com.lollipop.resource.sound.SoundManager
 
-class MainActivity : PagerActivity(), MainRiderPage.Callback {
+class MainActivity : PagerActivity(), DecadeRiderPage.Callback {
 
     override val pageArray: Array<Class<out SubPager>> by lazy {
         arrayOf(
-            MainRiderPage.Decade::class.java
+            DecadeRiderPage.DecadeNormal::class.java,
+            DecadeRiderPage.Decade21::class.java,
         )
     }
 
@@ -21,9 +20,15 @@ class MainActivity : PagerActivity(), MainRiderPage.Callback {
         SoundManager.play(SoundKey.DeviceBoot)
     }
 
-    override fun onRiderClick(rider: Rider) {
-        if (rider == Rider.Decade) {
-            startActivity(Intent(this, DcdHeiseiActivity::class.java))
+    override fun onDecadeIconClick(mode: DecadeRiderPage.Mode) {
+        when (mode) {
+            DecadeRiderPage.Mode.Normal -> {
+                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY)
+            }
+
+            DecadeRiderPage.Mode.Number21 -> {
+                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY21)
+            }
         }
     }
 
