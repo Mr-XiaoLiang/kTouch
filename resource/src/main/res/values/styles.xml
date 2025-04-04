@@ -1,6 +1,7 @@
 <resources>
 
     <style name="L.Theme.Activity.Base" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 
