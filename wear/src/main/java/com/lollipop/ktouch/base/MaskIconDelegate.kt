@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.lollipop.ktouch.R
 
 class MaskIconDelegate(
     val iconView: ImageView,
@@ -16,7 +15,7 @@ class MaskIconDelegate(
     init {
         iconView.setOnClickListener { onViewClick() }
         val colorList = ContextCompat.getColorStateList(
-            iconView.context, R.color.color_rider_icon
+            iconView.context, com.lollipop.resource.R.color.color_rider_icon
         )
         iconView.imageTintList = colorList
         maskView?.imageTintList = colorList

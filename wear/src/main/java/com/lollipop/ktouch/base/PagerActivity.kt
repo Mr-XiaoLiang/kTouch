@@ -42,13 +42,6 @@ abstract class PagerActivity : AppCompatActivity() {
             }
         )
         binding.viewPager.setPageTransformer(ScaledPageTransformer())
-        binding.copyrightView.setTypeface(
-            Typeface.createFromAsset(
-                assets,
-                "fonts/MeowScript.ttf"
-            ),
-            Typeface.NORMAL
-        )
         isPagerScrollEnabled(true)
     }
 
