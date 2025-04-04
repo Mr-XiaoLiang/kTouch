@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="12dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="4dp">
+
+    <com.lollipop.ktouch.widget.ParallelogramImageView
+        android:id="@+id/iconLineView"
+        android:layout_width="0px"
+        android:layout_height="3dp"
+        android:layout_marginStart="36dp"
+        android:background="#CCC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iconView"
+        app:layout_constraintTop_toTopOf="@id/iconView" />
+
+    <com.lollipop.ktouch.widget.ParallelogramImageView
+        android:id="@+id/iconView"
+        android:layout_width="72dp"
+        android:layout_height="28dp"
+        android:background="#CCC"
+        android:padding="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/black" />
+
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:fontFamily="@font/tokyo_2097"
+        android:gravity="center"
+        android:paddingVertical="6dp"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/nameIconView"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/iconView"
+        app:layout_constraintTop_toBottomOf="@id/iconLineView"
+        tools:text="555"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/nameIconView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="2dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_logo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nameView"
+        app:layout_constraintTop_toBottomOf="@id/iconLineView"
+        app:tint="@android:color/white"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_oval_block">
+    android:background="@drawable/bg_faiz_page">
 
     <androidx.wear.widget.WearableRecyclerView
         android:id="@+id/recyclerView"
-        android:scrollbarStyle="insideInset"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
