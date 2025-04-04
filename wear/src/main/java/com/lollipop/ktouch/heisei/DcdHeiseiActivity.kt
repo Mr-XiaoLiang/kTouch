@@ -1,4 +1,4 @@
-package com.lollipop.ktouch
+package com.lollipop.ktouch.heisei
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,6 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.lollipop.ktouch.base.SubPager
-import com.lollipop.ktouch.heisei.DcdHeisei10SubPage
-import com.lollipop.ktouch.heisei.DcdHeisei21SubPage
 
 class DcdHeiseiActivity : AppCompatActivity() {
 

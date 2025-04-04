@@ -26,10 +26,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DcdHeiseiActivity"
+            android:name=".heisei.DcdHeiseiActivity"
             android:exported="false"
             android:taskAffinity=""
             android:theme="@style/L.Theme.Activity.Swipe" />
+
+        <activity
+            android:name=".faiz.FaizMenuActivity"
+            android:exported="false"
+            android:taskAffinity=""
+            android:theme="@style/L.Theme.Activity.Swipe" />
+
     </application>
 
 </manifest>
