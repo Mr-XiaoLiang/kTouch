@@ -1,10 +1,10 @@
 package com.lollipop.ktouch.base
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -42,11 +42,19 @@ abstract class PagerActivity : AppCompatActivity() {
             }
         )
         binding.viewPager.setPageTransformer(ScaledPageTransformer())
+        val foregroundView = createForegroundView(binding.foregroundGroup)
+        if (foregroundView != null) {
+            binding.foregroundGroup.addView(foregroundView)
+        }
         isPagerScrollEnabled(true)
     }
 
     protected fun isPagerScrollEnabled(enable: Boolean) {
         binding.viewPager.isUserInputEnabled = enable
+    }
+
+    protected open fun createForegroundView(parent: ViewGroup): View? {
+        return null
     }
 
     private fun hideIndicator() {

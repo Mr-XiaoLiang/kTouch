@@ -4,6 +4,7 @@ import android.content.Context
 import kotlin.math.acos
 import kotlin.math.sqrt
 
+
 val Context.isScreenRound: Boolean
     get() {
         return resources.configuration.isScreenRound
@@ -14,6 +15,15 @@ object DeviceHelper {
         // 角度计算长度：2 * PI * radius * (angle / 360)
         // 反过来，通过长度尺寸换算角度
         return (arcDimen / (2 * Math.PI * radius) * 360).toFloat()
+    }
+
+    fun densityDpi(context: Context): Int {
+        return context.resources.displayMetrics.densityDpi
+    }
+
+    fun isPhone(context: Context): Boolean {
+        val dpi = densityDpi(context)
+        return dpi > 320
     }
 
     fun calculateCentralAngle(

@@ -1,12 +1,18 @@
 package com.lollipop.ktouch
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.lollipop.ktouch.base.PagerActivity
 import com.lollipop.ktouch.base.SubPager
+import com.lollipop.ktouch.databinding.ActivityMainForegroundBinding
 import com.lollipop.ktouch.faiz.FaizMenuActivity
 import com.lollipop.ktouch.heisei.DcdHeiseiActivity
 import com.lollipop.ktouch.main.DecadeRiderPage
 import com.lollipop.ktouch.main.FaizRiderPage
+import com.lollipop.ktouch.widget.DeviceHelper
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
 import com.lollipop.resource.sound.SoundManager
@@ -21,9 +27,55 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
         )
     }
 
+    private var displayMode = DisplayMode.Wear
+
+    private var foregroundView: ActivityMainForegroundBinding? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        SoundManager.load(this, SoundKey.DeviceSpace)
+        foregroundView?.also {
+            it.root.isVisible = false
+            it.modeIconButton.setOnClickListener { onDisplayModeButtonClick() }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         SoundManager.play(SoundKey.DeviceBoot)
+        updateDisplayMode()
+    }
+
+    override fun createForegroundView(parent: ViewGroup): View {
+        val binding = ActivityMainForegroundBinding.inflate(layoutInflater, parent, false)
+        foregroundView = binding
+        return binding.root
+    }
+
+    private fun onDisplayModeButtonClick() {
+        SoundManager.play(SoundKey.DeviceSpace)
+        val newMode = when (displayMode) {
+            DisplayMode.Wear -> DisplayMode.Phone
+            DisplayMode.Phone -> DisplayMode.Wear
+        }
+        displayMode = newMode
+        updateDisplayModeButton()
+    }
+
+    private fun updateDisplayMode() {
+        val isPhone = DeviceHelper.isPhone(this)
+        foregroundView?.also { it.root.isVisible = isPhone }
+        updateDisplayModeButton()
+    }
+
+    private fun updateDisplayModeButton() {
+        foregroundView?.also {
+            val icon = when (displayMode) {
+                DisplayMode.Wear -> R.drawable.ic_baseline_watch_24
+                DisplayMode.Phone -> R.drawable.ic_baseline_smartphone_24
+            }
+            it.modeIconButton.setImageResource(icon)
+        }
     }
 
     override fun onDecadeIconClick(mode: DecadeRiderPage.Mode) {
@@ -46,6 +98,11 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
 
             else -> {}
         }
+    }
+
+    private enum class DisplayMode {
+        Wear,
+        Phone
     }
 
 }

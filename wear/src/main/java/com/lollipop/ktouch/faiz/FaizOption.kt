@@ -1,6 +1,7 @@
 package com.lollipop.ktouch.faiz
 
-import com.lollipop.ktouch.R
+import com.lollipop.resource.R
+
 
 enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0) {
 
