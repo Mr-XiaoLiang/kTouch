@@ -6,7 +6,7 @@ import com.lollipop.ktouch.base.RiderIconNeonManager
 
 sealed class MerryGoRoundNeon : RiderIconNeonManager.NeonStep() {
 
-    override val duration: Long = 1000
+    override val duration: Long = 1600
 
     override fun buildTrain(iconGroup: RiderIconGroup, animator: RiderIconAnimator) {
         val iconCount = iconGroup.playerIconCount

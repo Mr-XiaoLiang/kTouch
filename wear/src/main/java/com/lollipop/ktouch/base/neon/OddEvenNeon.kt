@@ -6,7 +6,7 @@ import com.lollipop.ktouch.base.RiderIconNeonManager
 
 object OddEvenNeon : RiderIconNeonManager.NeonStep() {
 
-    override val duration: Long = 500L
+    override val duration: Long = 1000L
     override fun buildTrain(iconGroup: RiderIconGroup, animator: RiderIconAnimator) {
         animator.setIntValues(0, 2)
         animator.setAllDuration(duration, 2)

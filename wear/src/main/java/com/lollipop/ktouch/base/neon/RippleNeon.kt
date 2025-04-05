@@ -11,7 +11,7 @@ class RippleNeon(
 
     companion object {
 
-        private const val DURATION = 500L
+        private const val DURATION = 1500L
 
         fun create(startIndex: Int, duration: Long): RippleNeon {
             return RippleNeon(startIndex, (duration / DURATION).toInt())
