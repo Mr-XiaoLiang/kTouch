@@ -2,8 +2,16 @@ package com.lollipop.ktouch.base
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.lollipop.resource.sound.SoundPage
+import com.lollipop.resource.sound.SoundPlayer
 
-abstract class SubPager : Fragment() {
+abstract class SubPager : Fragment(), SoundPage {
+
+    protected val soundPlayer = SoundPlayer.GroupPlayer()
+
+    override fun stopAll() {
+        soundPlayer.stopAll()
+    }
 
     protected inline fun <reified T> findCallback(c: Context): T? {
         parentFragment?.let {

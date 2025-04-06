@@ -10,7 +10,6 @@ import com.lollipop.ktouch.base.RiderIconManager
 import com.lollipop.ktouch.base.RiderIconNeonManager
 import com.lollipop.ktouch.base.SubPager
 import com.lollipop.resource.sound.Rider
-import com.lollipop.resource.sound.SoundManager
 
 abstract class HeiseiSubPage : SubPager() {
 
@@ -31,8 +30,7 @@ abstract class HeiseiSubPage : SubPager() {
 
     protected fun preloadRider(context: Context, vararg riderArray: Rider) {
         for (rider in riderArray) {
-            SoundManager.load(context, rider.nameSound)
-            SoundManager.load(context, rider.skillSound)
+            soundPlayer.preload(context, rider.nameSound, rider.skillSound)
         }
     }
 

@@ -10,7 +10,6 @@ import com.lollipop.ktouch.base.neon.RippleNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei10Binding
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
-import com.lollipop.resource.sound.SoundManager
 
 class DcdHeisei10SubPage : DcdHeiseiSubPage() {
 
@@ -18,7 +17,7 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        SoundManager.load(context, SoundKey.HeiseiDcdFinally)
+        soundPlayer.preload(context, SoundKey.HeiseiDcdFinally)
         preloadRider(
             context,
             Rider.Kuuga,
@@ -89,23 +88,23 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
 
     override fun onResume() {
         super.onResume()
-        SoundManager.play(SoundKey.DeviceBoot)
+        soundPlayer.play(SoundKey.DeviceBoot)
     }
 
     private fun onFClick() {
         when (currentState) {
             State.INIT -> {
                 // 这种情况下，就不操作吧
-                SoundManager.play(SoundKey.DeviceSpace)
+                soundPlayer.play(SoundKey.DeviceSpace)
             }
 
             State.READY -> {
                 if (selectedRiderList.isEmpty()) {
                     // 这种情况下，就不操作吧
-                    SoundManager.play(SoundKey.DeviceSpace)
+                    soundPlayer.play(SoundKey.DeviceSpace)
                 } else {
                     selectedRiderList.lastOrNull()?.let {
-                        SoundManager.play(it.skillSound)
+                        soundPlayer.play(it.skillSound)
                         newNeon(true).play(
                             listOf(
                                 RippleNeon.create(
@@ -130,13 +129,13 @@ class DcdHeisei10SubPage : DcdHeiseiSubPage() {
     }
 
     private fun onCClick() {
-        SoundManager.play(SoundKey.DeviceSpace)
+        soundPlayer.stopAll()
         if (selectedRiderList.isNotEmpty()) {
             selectedRiderList.clear()
             iconManager.selectOnly(-1)
         } else {
             // TODO 退出的声音需要确认一下
-            SoundManager.play(SoundKey.DeviceExit21)
+            soundPlayer.play(SoundKey.DeviceExit21)
             currentState = State.INIT
         }
     }

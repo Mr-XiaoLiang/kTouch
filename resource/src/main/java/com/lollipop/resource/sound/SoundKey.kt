@@ -11,6 +11,7 @@ enum class SoundKey(
     DeviceBoot21(R.raw.s_device_boot_21, 4000),
     DeviceExit21(R.raw.s_device_exit_21, 1303),
     DeviceSpace(R.raw.s_device_space, 248),
+    DeviceReady(R.raw.s_device_ready, 4178),
 
     NameAgito(R.raw.s_name_agito, 915),
     NameBlade(R.raw.s_name_blade, 946),

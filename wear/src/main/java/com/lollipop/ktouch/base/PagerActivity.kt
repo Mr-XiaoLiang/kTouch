@@ -10,8 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.lollipop.ktouch.databinding.ActivityPageManagerBinding
+import com.lollipop.resource.sound.SoundPage
+import com.lollipop.resource.sound.SoundPageParent
+import com.lollipop.resource.sound.SoundPlayer
 
-abstract class PagerActivity : AppCompatActivity() {
+abstract class PagerActivity : AppCompatActivity(), SoundPageParent {
 
     private val binding by lazy {
         ActivityPageManagerBinding.inflate(layoutInflater)
@@ -26,6 +29,8 @@ abstract class PagerActivity : AppCompatActivity() {
     private val autoHideIndicatorTask = Runnable {
         hideIndicator()
     }
+
+    protected val soundPlayer = SoundPlayer.GroupPlayer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,18 @@ abstract class PagerActivity : AppCompatActivity() {
             binding.foregroundGroup.addView(foregroundView)
         }
         isPagerScrollEnabled(true)
+    }
+
+    override fun stopAll() {
+        soundPlayer.stopAll()
+    }
+
+    override fun addSubPage(subPage: SoundPage) {
+        soundPlayer.addSubPage(subPage)
+    }
+
+    override fun removeSubPage(subPage: SoundPage) {
+        soundPlayer.removeSubPage(subPage)
     }
 
     protected fun isPagerScrollEnabled(enable: Boolean) {

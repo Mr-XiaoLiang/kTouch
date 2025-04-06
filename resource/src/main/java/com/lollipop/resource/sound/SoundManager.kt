@@ -11,7 +11,7 @@ import java.util.concurrent.Executors
 
 object SoundManager {
 
-    private val soundPlayTimeMap = ConcurrentHashMap<SoundKey, Long>()
+    private val soundPlayInfoMap = ConcurrentHashMap<SoundKey, SoundPlayInfo>()
     private val soundPoolList = ArrayList<SoundPlayer>()
 
     private val executor by lazy {
@@ -32,12 +32,19 @@ object SoundManager {
     }
 
     fun isPlaying(soundKey: SoundKey): Boolean {
-        val startTime = soundPlayTimeMap[soundKey] ?: return false
-        return now() - startTime <= soundKey.timeMillis
+        val playInfo = soundPlayInfoMap[soundKey] ?: return false
+        val startTime = playInfo.startTime
+        if (now() - startTime <= soundKey.timeMillis) {
+            return true
+        }
+        if (playInfo.isLooping) {
+            return true
+        }
+        return false
     }
 
-    private fun rememberPlay(soundKey: SoundKey) {
-        soundPlayTimeMap[soundKey] = now()
+    private fun rememberPlay(soundKey: SoundKey, isLooping: Boolean) {
+        soundPlayInfoMap[soundKey] = SoundPlayInfo(soundKey, now(), isLooping)
     }
 
     fun load(context: Context, soundKey: SoundKey) {
@@ -72,10 +79,10 @@ object SoundManager {
         }
     }
 
-    fun play(soundKey: SoundKey) {
+    fun play(soundKey: SoundKey, isLooping: Boolean = false) {
         val pool = findPool(soundKey) ?: return
-        pool.play(soundKey)
-        rememberPlay(soundKey)
+        pool.play(soundKey, isLooping)
+        rememberPlay(soundKey, isLooping)
     }
 
     fun pause(soundKey: SoundKey) {
@@ -89,15 +96,21 @@ object SoundManager {
     fun stop(soundKey: SoundKey) {
         if (isPlaying(soundKey)) {
             findPool(soundKey)?.stop(soundKey)
-            soundPlayTimeMap.remove(soundKey)
+            soundPlayInfoMap.remove(soundKey)
         }
     }
 
-    fun preload(context: Context, array: Array<SoundKey>) {
+    fun preload(context: Context, array: Array<out SoundKey>) {
         array.forEach {
             load(context, it)
         }
     }
+
+    private class SoundPlayInfo(
+        val key: SoundKey,
+        val startTime: Long,
+        val isLooping: Boolean
+    )
 
     private interface SoundPlayer {
 
@@ -105,7 +118,7 @@ object SoundManager {
 
         fun canLoad(soundKey: SoundKey): Boolean
 
-        fun play(soundKey: SoundKey)
+        fun play(soundKey: SoundKey, isLooping: Boolean)
 
         fun pause(soundKey: SoundKey)
 
@@ -159,9 +172,14 @@ object SoundManager {
             return freeSoundTime >= soundKey.timeMillis
         }
 
-        override fun play(soundKey: SoundKey) {
+        override fun play(soundKey: SoundKey, isLooping: Boolean) {
             val id = soundIdMap[soundKey] ?: return
-            val playId = soundPool.play(id, 1f, 1f, 1, 0, 1f)
+            val loop = if (isLooping) {
+                -1
+            } else {
+                0
+            }
+            val playId = soundPool.play(id, 1f, 1f, 1, loop, 1f)
             streamIdMap[soundKey] = playId
         }
 
@@ -211,11 +229,14 @@ object SoundManager {
             return currentSoundKey == null
         }
 
-        override fun play(soundKey: SoundKey) {
+        override fun play(soundKey: SoundKey, isLooping: Boolean) {
             if (currentSoundKey != soundKey) {
                 return
             }
-            player?.start()
+            player?.also {
+                it.isLooping = isLooping
+                it.start()
+            }
         }
 
         override fun pause(soundKey: SoundKey) {

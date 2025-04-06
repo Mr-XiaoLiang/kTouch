@@ -15,7 +15,6 @@ import com.lollipop.ktouch.main.FaizRiderPage
 import com.lollipop.ktouch.widget.DeviceHelper
 import com.lollipop.resource.sound.Rider
 import com.lollipop.resource.sound.SoundKey
-import com.lollipop.resource.sound.SoundManager
 
 class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Callback {
 
@@ -33,7 +32,7 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SoundManager.load(this, SoundKey.DeviceSpace)
+        soundPlayer.preload(this, SoundKey.DeviceSpace)
         foregroundView?.also {
             it.root.isVisible = false
             it.modeIconButton.setOnClickListener { onDisplayModeButtonClick() }
@@ -42,7 +41,7 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
 
     override fun onResume() {
         super.onResume()
-        SoundManager.play(SoundKey.DeviceBoot)
+        soundPlayer.play(SoundKey.DeviceBoot)
         updateDisplayMode()
     }
 
@@ -53,7 +52,7 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
     }
 
     private fun onDisplayModeButtonClick() {
-        SoundManager.play(SoundKey.DeviceSpace)
+        soundPlayer.play(SoundKey.DeviceSpace)
         val newMode = when (displayMode) {
             DisplayMode.Wear -> DisplayMode.Phone
             DisplayMode.Phone -> DisplayMode.Wear
