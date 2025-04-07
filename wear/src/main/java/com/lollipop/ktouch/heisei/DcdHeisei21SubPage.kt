@@ -129,6 +129,8 @@ class DcdHeisei21SubPage : DcdHeiseiSubPage() {
 
     private fun onCClick() {
         soundPlayer.stopAll()
+        neonManager?.cancel()
+        neonManager = null
         if (selectedRiderList.isNotEmpty()) {
             selectedRiderList.clear()
             iconManager.selectOnly(-1)
