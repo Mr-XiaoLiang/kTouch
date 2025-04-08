@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lollipop.ktouch.databinding.FragmentSingleRiderBinding
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 
 /**
  * 暂时特效不全，先忽略吧

@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.lollipop.ktouch.base.SubPager
 import com.lollipop.ktouch.databinding.FragmentMainDecadeBinding
-import com.lollipop.resource.sound.Rider
-import com.lollipop.resource.sound.SoundManager
+import com.lollipop.resource.Rider
 
 /**
  * 暂时特效不全，先忽略吧

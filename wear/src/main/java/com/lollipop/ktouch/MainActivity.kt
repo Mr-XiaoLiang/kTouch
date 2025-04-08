@@ -13,7 +13,7 @@ import com.lollipop.ktouch.heisei.DcdHeiseiActivity
 import com.lollipop.ktouch.main.DecadeRiderPage
 import com.lollipop.ktouch.main.FaizRiderPage
 import com.lollipop.ktouch.widget.DeviceHelper
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 import com.lollipop.resource.sound.SoundKey
 
 class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Callback {

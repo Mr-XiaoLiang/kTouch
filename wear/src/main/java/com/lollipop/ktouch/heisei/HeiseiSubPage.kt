@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.lollipop.ktouch.base.RiderIconManager
 import com.lollipop.ktouch.base.RiderIconNeonManager
 import com.lollipop.ktouch.base.SubPager
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 
 abstract class HeiseiSubPage : SubPager() {
 

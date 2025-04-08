@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.lollipop.ktouch.base.RiderIconAnimator
 import com.lollipop.ktouch.base.neon.RippleNeon
 import com.lollipop.ktouch.databinding.FragmentCardHeisei10Binding
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 import com.lollipop.resource.sound.SoundKey
 
 class DcdHeisei10SubPage : DcdHeiseiSubPage() {

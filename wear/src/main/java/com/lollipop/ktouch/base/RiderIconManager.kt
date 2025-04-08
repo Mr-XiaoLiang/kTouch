@@ -1,7 +1,7 @@
 package com.lollipop.ktouch.base
 
 import android.widget.ImageView
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 
 class RiderIconManager(
     private var onRiderClickCallback: OnRiderClickCallback? = null

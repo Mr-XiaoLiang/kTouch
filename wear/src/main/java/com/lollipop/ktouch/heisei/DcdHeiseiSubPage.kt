@@ -3,7 +3,7 @@ package com.lollipop.ktouch.heisei
 import android.content.Context
 import com.lollipop.ktouch.base.RiderIconAnimator
 import com.lollipop.ktouch.widget.ArcTouchLayout
-import com.lollipop.resource.sound.Rider
+import com.lollipop.resource.Rider
 import com.lollipop.resource.sound.SoundKey
 
 abstract class DcdHeiseiSubPage : HeiseiSubPage() {

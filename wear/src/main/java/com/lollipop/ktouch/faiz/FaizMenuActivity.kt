@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import androidx.wear.widget.WearableLinearLayoutManager
 import com.lollipop.ktouch.databinding.ActivityFaizMenuBinding
 import com.lollipop.ktouch.databinding.ItemFaizOptionBinding
 import com.lollipop.ktouch.databinding.ItemFaizSmartbrainBinding
+import com.lollipop.resource.FaizOption
 
 class FaizMenuActivity : AppCompatActivity() {
 
