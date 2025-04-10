@@ -16,7 +16,7 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
     /**
      * 德尔塔变身
      */
-    DeltaHeisei(R.drawable.ic_logo, "Delta"),
+    DeltaHeisei(R.drawable.ic_logo, "333"),
 
     /**
      * 天帝变身
@@ -180,42 +180,42 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
      * Kaixa
      * 疑似载具攻击
      */
-    Temp9814(R.drawable.ic_logo, "9814"),
+//    Temp9814(R.drawable.ic_logo, "9814"),
 
     /**
      * Kaixa
      * 疑似召唤载具
      */
-    Temp9821(R.drawable.ic_logo, "9821"),
+//    Temp9821(R.drawable.ic_logo, "9821"),
 
     /**
      * Kaixa
      * battle mode
      */
-    Temp9826(R.drawable.ic_logo, "9826"),
+//    Temp9826(R.drawable.ic_logo, "9826"),
 
     /**
      * Kaixa
      * vehicle mode(战车模式)
      */
-    Temp9886(R.drawable.ic_logo, "9886"),
+//    Temp9886(R.drawable.ic_logo, "9886"),
 
     /**
      * 真红大炮
      * 圣诞快乐
      */
-    Temp1224(R.drawable.ic_logo, "1224"),
+//    Temp1224(R.drawable.ic_logo, "1224"),
 
     /**
      * 真红大炮
      * 新年快乐
      */
-    Temp2004(R.drawable.ic_logo, "2004"),
+//    Temp2004(R.drawable.ic_logo, "2004"),
 
     /**
      * 真红大炮
      * 循环音效模式
      */
-    Temp391(R.drawable.ic_logo, "391"),
+//    Temp391(R.drawable.ic_logo, "391"),
 
 }

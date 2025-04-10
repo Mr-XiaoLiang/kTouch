@@ -34,7 +34,6 @@
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="none"
         android:fontFamily="@font/tokyo_2097"
         android:gravity="center"
         android:paddingVertical="6dp"
