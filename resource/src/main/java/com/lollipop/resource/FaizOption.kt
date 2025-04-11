@@ -6,7 +6,7 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
     /**
      * Faiz变身
      */
-    FaizHeisei(R.drawable.ic_logo, "555"),
+    FaizHeisei(R.drawable.ic_faiz_555, "555"),
 
     /**
      * 凯撒变身
