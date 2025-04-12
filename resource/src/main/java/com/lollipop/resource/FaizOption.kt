@@ -33,20 +33,20 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
      * Phone Blaster Single Mode
      * 最多12发
      */
-    PhoneBlasterSingleMode(R.drawable.ic_logo, "103"),
+    PhoneBlasterSingleMode(R.drawable.ic_faiz_103, "103"),
 
     /**
      * 连发模式
      * 三连发，最多4次
      * Phone Blaster Burst Mode，Phone Blaster的三连发模式
      */
-    PhoneBlasterBurstMode(R.drawable.ic_logo, "106"),
+    PhoneBlasterBurstMode(R.drawable.ic_faiz_106, "106"),
 
     /**
      * 充能
      * Phone Blaster Charge，让各发射模式下的Phone Blaster再次充填能量。
      */
-    PhoneBlasterCharge(R.drawable.ic_logo, "279"),
+    PhoneBlasterCharge(R.drawable.ic_faiz_279, "279"),
 
     /**
      * 召唤巨型载具
