@@ -71,7 +71,7 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
     /**
      * 加速手表
      */
-    FaizAxelMode(R.drawable.ic_logo, "Axel"),
+    FaizAxelMode(R.drawable.ic_faiz_wear, "Axel"),
 
     /**
      * 真红大炮
