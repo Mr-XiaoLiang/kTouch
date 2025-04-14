@@ -53,19 +53,19 @@ enum class FaizOption(val icon: Int, val code: String = "", val command: Int = 0
      *  呼叫Jet Sliger，输入后会发出“Jet Sliger come closer”的语音，
      *  Jet Sliger会以自动驾驶的方式到达使用者身边。
      */
-    JetSligerComeCloser(R.drawable.ic_logo, "3821"),
+    JetSligerComeCloser(R.drawable.ic_faiz_3821, "3821"),
 
     /**
      * 巨型载具
      * 喷射滑行者 准备行动
      */
-    JetSligerGetIntoAction(R.drawable.ic_logo, "3814"),
+    JetSligerGetIntoAction(R.drawable.ic_faiz_3814, "3814"),
 
     /**
      * 巨型载具
      * 喷射滑行者 起飞
      */
-    JetSligerTakeOff(R.drawable.ic_logo, "3846"),
+    JetSligerTakeOff(R.drawable.ic_faiz_3846, "3846"),
 
 
     /**
