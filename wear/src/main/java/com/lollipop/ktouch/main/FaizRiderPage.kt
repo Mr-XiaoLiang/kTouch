@@ -9,6 +9,4 @@ class FaizRiderPage : SingleRiderPage() {
         return Rider.Faiz
     }
 
-    interface Callback: SingleRiderPage.Callback
-
 }

@@ -6,22 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.lollipop.ktouch.base.PagerActivity
+import com.lollipop.ktouch.base.SingleRiderPage
 import com.lollipop.ktouch.base.SubPager
 import com.lollipop.ktouch.databinding.ActivityMainForegroundBinding
 import com.lollipop.ktouch.faiz.FaizMenuActivity
 import com.lollipop.ktouch.heisei.DcdHeiseiActivity
+import com.lollipop.ktouch.main.Decade21RiderPage
 import com.lollipop.ktouch.main.DecadeRiderPage
 import com.lollipop.ktouch.main.FaizRiderPage
 import com.lollipop.ktouch.widget.DeviceHelper
 import com.lollipop.resource.Rider
 import com.lollipop.resource.sound.SoundKey
 
-class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Callback {
+class MainActivity : PagerActivity(), SingleRiderPage.Callback {
 
     override val pageArray: Array<Class<out SubPager>> by lazy {
         arrayOf(
-            DecadeRiderPage.DecadeNormal::class.java,
-            DecadeRiderPage.Decade21::class.java,
+            DecadeRiderPage::class.java,
+            Decade21RiderPage::class.java,
             FaizRiderPage::class.java
         )
     }
@@ -77,22 +79,18 @@ class MainActivity : PagerActivity(), DecadeRiderPage.Callback, FaizRiderPage.Ca
         }
     }
 
-    override fun onDecadeIconClick(mode: DecadeRiderPage.Mode) {
-        when (mode) {
-            DecadeRiderPage.Mode.Normal -> {
-                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY)
-            }
-
-            DecadeRiderPage.Mode.Number21 -> {
-                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY21)
-            }
-        }
-    }
-
     override fun onRiderClick(rider: Rider) {
         when (rider) {
             Rider.Faiz -> {
                 startActivity(Intent(this, FaizMenuActivity::class.java))
+            }
+
+            Rider.Decade -> {
+                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY)
+            }
+
+            Rider.Decade21 -> {
+                DcdHeiseiActivity.start(this, DcdHeiseiActivity.SubPage.FINALLY21)
             }
 
             else -> {}

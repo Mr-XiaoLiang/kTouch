@@ -12,6 +12,7 @@ enum class Rider(
     Blade(R.drawable.ic_blade, SoundKey.NameBlade, SoundKey.SkillBlade),
     Build(R.drawable.ic_build, SoundKey.NameBuild, SoundKey.SkillBuild),
     Decade(R.drawable.ic_decade, SoundKey.NameDecade, SoundKey.SkillDecade),
+    Decade21(R.drawable.ic_decade_21, SoundKey.NameDecade, SoundKey.SkillDecade),
     Deno(R.drawable.ic_deno, SoundKey.NameDeno, SoundKey.SkillDeno),
     Double(R.drawable.ic_double, SoundKey.NameDouble, SoundKey.SkillDouble),
     Drive(R.drawable.ic_drive, SoundKey.NameDrive, SoundKey.SkillDrive),
