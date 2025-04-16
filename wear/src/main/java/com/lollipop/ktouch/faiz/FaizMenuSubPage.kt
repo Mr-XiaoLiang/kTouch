@@ -105,7 +105,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
     class Kaixa : FaizMenuSubPage() {
 
-        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_faiz
+        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_kaixa
 
         override val riderBackgroundId: Int = R.drawable.bg_faiz_page
 
