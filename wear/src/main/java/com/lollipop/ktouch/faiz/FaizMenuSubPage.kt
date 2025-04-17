@@ -107,7 +107,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
         override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_kaixa
 
-        override val riderBackgroundId: Int = R.drawable.bg_faiz_page
+        override val riderBackgroundId: Int = R.drawable.bg_kaixa_page
 
         private val optionDataList by lazy {
             listOf(
@@ -129,9 +129,9 @@ sealed class FaizMenuSubPage : SubPager() {
 
     class Delta : FaizMenuSubPage() {
 
-        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_faiz
+        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_delta
 
-        override val riderBackgroundId: Int = R.drawable.bg_faiz_page
+        override val riderBackgroundId: Int = R.drawable.bg_delta_page
 
         private val optionDataList by lazy {
             listOf(
