@@ -177,9 +177,9 @@ sealed class FaizMenuSubPage : SubPager() {
 
     class Orga : FaizMenuSubPage() {
 
-        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_faiz
+        override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_orga
 
-        override val riderBackgroundId: Int = R.drawable.bg_faiz_page
+        override val riderBackgroundId: Int = R.drawable.bg_orga_page
 
         private val optionDataList by lazy {
             listOf(
