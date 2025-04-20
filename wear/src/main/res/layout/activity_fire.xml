@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0px"
+        android:layout_height="0px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currentModeIcon"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:background="@drawable/bg_faiz_page"
+            android:src="@drawable/ic_faiz_103"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <com.lollipop.ktouch.widget.ParallelogramImageView
+            android:id="@+id/fillButton"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:background="#DDD"
+            android:src="@drawable/ic_faiz_279"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1080:420"
+            app:layout_constraintEnd_toStartOf="@id/modeButton"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            app:tint="@android:color/black" />
+
+        <com.lollipop.ktouch.widget.ParallelogramImageView
+            android:id="@+id/modeButton"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:background="#DDD"
+            android:src="@drawable/ic_faiz_106"
+            app:layout_constraintBottom_toBottomOf="@id/fillButton"
+            app:layout_constraintDimensionRatio="1080:420"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toEndOf="@id/fillButton"
+            app:layout_constraintTop_toTopOf="@id/fillButton"
+            app:tint="@android:color/black" />
+
+        <com.lollipop.ktouch.widget.ArcLayout
+            android:id="@+id/bulletGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet01Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="206"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet02Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="201"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet03Icon"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="196"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet04Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="191"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet05Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="186"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet06Icon"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="181"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet07Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="176"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet08Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="171"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet09Icon"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="166"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet10Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="161"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet11Icon"
+                android:layout_width="34dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="156"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bullet12Icon"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:src="@drawable/ic_faiz_bullet"
+                app:layout_arc_angle="150"
+                app:layout_arc_fixEdge="true"
+                app:layout_arc_heightPercent="0.03"
+                app:layout_arc_sizeMode="minEdge"
+                app:layout_arc_widthPercent="0.09" />
+
+        </com.lollipop.ktouch.widget.ArcLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
