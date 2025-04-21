@@ -17,7 +17,7 @@ import com.lollipop.ktouch.databinding.ItemFaizOptionBinding
 import com.lollipop.ktouch.databinding.ItemFaizSmartbrainBinding
 import com.lollipop.resource.FaizOption
 
-sealed class FaizMenuSubPage : SubPager() {
+sealed class FaizMenuSubPage(val rider: FireRider) : SubPager() {
 
     private var binding: FragmentFaizMenuBinding? = null
 
@@ -60,10 +60,123 @@ sealed class FaizMenuSubPage : SubPager() {
     protected abstract fun getOptionList(): List<FaizOption>
 
     private fun onOptionClick(option: FaizOption) {
-        // TODO
+        when (option) {
+            FaizOption.FaizHeisei -> {
+                // TODO()
+            }
+
+            FaizOption.KaixaHeisei -> {
+                // TODO()
+            }
+
+            FaizOption.DeltaHeisei -> {
+                // TODO()
+            }
+
+            FaizOption.PsygaHeisei -> {
+                // TODO()
+            }
+
+            FaizOption.OrgaHeisei -> {
+                // TODO()
+            }
+
+            FaizOption.PhoneBlasterSingleMode -> {
+                activity?.let {
+                    FireActivity.start(it, FireActivity.FireMode.Single, rider)
+                }
+            }
+
+            FaizOption.PhoneBlasterBurstMode -> {
+                activity?.let {
+                    FireActivity.start(it, FireActivity.FireMode.Burst, rider)
+                }
+            }
+
+            FaizOption.PhoneBlasterCharge -> {
+                FireActivity.fillBullet()
+                // TODO()
+            }
+
+            FaizOption.JetSligerComeCloser -> {
+                // TODO()
+            }
+
+            FaizOption.JetSligerGetIntoAction -> {
+                // TODO()
+            }
+
+            FaizOption.JetSligerTakeOff -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAxelMode -> {
+                // TODO()
+            }
+
+            FaizOption.FaizPointer -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterCrimsonSmash -> {
+                // TODO()
+            }
+
+            FaizOption.FaizShot -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterGrandImpact -> {
+                // TODO()
+            }
+
+            FaizOption.FaizEdge -> {
+                // TODO()
+            }
+
+            FaizOption.FaizEdgeExceed -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterTakeOff -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterDischarge -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterBladeMode -> {
+                // TODO()
+            }
+
+            FaizOption.FaizBlasterBlasterMode -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAutoVajinGetIntoAction -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAutoVajinComeCloser -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAutoVajinTakeOff -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAutoVajinBattleMode -> {
+                // TODO()
+            }
+
+            FaizOption.FaizAutoVajinVehicleMode -> {
+                // TODO()
+            }
+        }
     }
 
-    class Faiz : FaizMenuSubPage() {
+    class Faiz : FaizMenuSubPage(FireRider.Faiz) {
 
         private val optionDataList by lazy {
             listOf(
@@ -103,7 +216,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
     }
 
-    class Kaixa : FaizMenuSubPage() {
+    class Kaixa : FaizMenuSubPage(FireRider.Kaixa) {
 
         override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_kaixa
 
@@ -127,7 +240,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
     }
 
-    class Delta : FaizMenuSubPage() {
+    class Delta : FaizMenuSubPage(FireRider.Delta) {
 
         override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_delta
 
@@ -151,7 +264,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
     }
 
-    class Psyga : FaizMenuSubPage() {
+    class Psyga : FaizMenuSubPage(FireRider.Psyga) {
 
         override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_psyga
 
@@ -175,7 +288,7 @@ sealed class FaizMenuSubPage : SubPager() {
 
     }
 
-    class Orga : FaizMenuSubPage() {
+    class Orga : FaizMenuSubPage(FireRider.Orga) {
 
         override val riderIconId: Int = com.lollipop.resource.R.drawable.ic_orga
 
