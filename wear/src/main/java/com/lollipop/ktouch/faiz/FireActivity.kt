@@ -26,6 +26,10 @@ class FireActivity : AppCompatActivity() {
 
     }
 
+    private val fireMotionSensing by lazy {
+        FireMotionSensing(this, ::fire)
+    }
+
     private val binding by lazy {
         ActivityFireBinding.inflate(layoutInflater)
     }
@@ -74,6 +78,16 @@ class FireActivity : AppCompatActivity() {
         }
         initData()
         updateMode()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fireMotionSensing.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fireMotionSensing.onStop()
     }
 
     private fun fire() {
