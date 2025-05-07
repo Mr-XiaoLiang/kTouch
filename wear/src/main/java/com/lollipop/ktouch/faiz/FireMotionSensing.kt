@@ -11,11 +11,11 @@ class FireMotionSensing(
 ) {
 
     fun onStart() {
-        // TODO
+        // TODO(怎么写？)
     }
 
     fun onStop() {
-        // TODO
+        // TODO()
     }
 
     fun interface FireCallback {
